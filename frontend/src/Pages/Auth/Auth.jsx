@@ -1,5 +1,7 @@
 import { useState } from "react";
 import React from "react";
+import { GoogleLogin } from '@react-oauth/google';
+
 import "./Auth.css";
 
 function Auth() {
@@ -9,6 +11,15 @@ function Auth() {
   const [fname, setFname] = useState("");
   const [passwd, setPasswd] = useState("");
   const [cnfPass, setCnfPass] = useState("");
+  const credentialResponse = {
+    web: {
+      "client_id":
+        "983222062492-hg2nks96hdo66l7roqsgtltglblv0138.apps.googleusercontent.com",
+      "credential": "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",
+      "select_by":"btn",
+      redirect_uris: ["http://localhost:3000/auth/google/callback"],
+    },
+  };
 
   const handleRegister = () => {
     const content = {
@@ -28,6 +39,7 @@ function Auth() {
       .then((res) => res.json())
       .then((res) => console.log(res));
   };
+
   return (
     <div className="Auth">
       {newUser ? (
@@ -104,7 +116,15 @@ function Auth() {
           </p>
         </>
       )}
-      <button>Login with Google</button>
+
+      {/* <GoogleLogin
+        onSuccess={(credentialResponse) => {
+          console.log(credentialResponse);
+        }}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+      /> */}
     </div>
   );
 }
