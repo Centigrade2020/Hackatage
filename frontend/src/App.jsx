@@ -12,6 +12,11 @@ function App() {
           <Route exact path="/" element={<Pages.Home />} />
           <Route exact path="/auth" element={<Pages.Auth />} />
           <Route exact path="/dashboard" element={<Pages.Dashboard />} />
+          <Route
+            exact
+            path="/searchTickets"
+            element={<Pages.TripPlannerPage />}
+          />
         </Routes>
         <Components.Footer />
       </Router>
