@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view,parser_classes
 from rest_framework.parsers import JSONParser
 from django.contrib.auth.hashers import make_password,check_password
-from .models import get_auth,add_user,get_user,authenticate,chk_auth,logout_user,add_data
+from .models import get_auth,add_user,get_user,authenticate,chk_auth,logout_user,u_user,add_data
 from bson import json_util
 import json
 import openai
@@ -42,6 +42,30 @@ def create_user(request):
         return Response({"message":"Some error Occurred"})     
 
 
+@api_view(["POST"])
+@parser_classes([JSONParser])
+def getUser(request):
+    try:
+        data =request.data
+        user = get_user(data['email'])
+        return Response({"message":json.loads(json_util.dumps(user))})
+    except Exception as e:
+        print("get user",e)
+        return Response({"message":"Some error Occurred"})
+
+@api_view(["POST"])
+@parser_classes([JSONParser])
+def update_user(request):
+    try:
+        data = request.data
+        print(data['email'])
+        u_user(data['email'],data['phone'],data['day'],data['month'],data['year'],data['city'],data['state'],data['country'])
+        user = get_user(data['email'])
+        return Response({"message":json.loads(json_util.dumps(user))})
+    except Exception as e:
+        print("update user ",e)
+        return Response({"message":"Some error Occurred"})
+
 
 def login(email,password):
     try :
@@ -49,11 +73,11 @@ def login(email,password):
         for i in user:
             if i:
                 passwd = i['password']
-        if check_password(password,passwd):
-            u = authenticate(i["_id"]) 
-            return u
-        else:
-            return False
+                if check_password(password,passwd):
+                    u = authenticate(i["_id"]) 
+                    return u
+                else:
+                    return False
     except Exception as e:
         print("login ",e)
         return False
@@ -65,6 +89,7 @@ def login_user(request):
         if request.data:
             data = request.data
             chk = login(data['email'],data['passwd'])
+            print(chk)
             if chk:
                 print(json.loads(json_util.dumps(chk)))
                 return Response({'message':json.loads(json_util.dumps(chk)),"status_code":200,"is_authenticated":chk['is_authenticated']})
@@ -78,7 +103,7 @@ def login_user(request):
 @parser_classes([JSONParser])
 def logout(request):
     data = request.data
-    logout_user(data['email'])
+    logout_user(data['id'])
 
 @api_view(["POST"])
 @parser_classes([JSONParser])

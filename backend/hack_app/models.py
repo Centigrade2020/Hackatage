@@ -8,6 +8,7 @@ client = pymongo.MongoClient((env("MONGO_CONN")))
 dbname = client['TripDB']
 
 
+
 def get_auth():
     coll = dbname['users']
     user = coll.find_one({'email':"dd@gmail.com",'password':"123"})
@@ -26,8 +27,10 @@ def add_user(fname,lname,email,password):
 def get_user(email):
     coll = dbname['users']
     user = coll.find({"email":email})
-    return user
-
+    for i in user:
+        if i:
+            return i
+        return None
 def authenticate(userId):
     coll = dbname['users']
     coll.update_one({"_id":userId},{"$set":{"is_authenticated":True}})
@@ -46,3 +49,16 @@ def logout_user(userId):
 def add_data(data):
     coll=dbname['user_trips']
     coll.insert_many(data)
+#         phone,
+#         day,
+#         month,
+#         year,
+#         city,
+#         state,
+#         country
+
+def u_user(userId,phone,day,month,year,city,state,country):
+    coll = dbname['users']
+    coll.update_one({"email":userId},{"$set":{"phone":phone,"day":day,"month":month,"year":year,"city":city,"state":state,"country":country}})
+
+    

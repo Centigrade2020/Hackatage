@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 
 function Dashboard() {
   const [profileData, setProfileData] = useState({
-    fname: "Dharun",
-    lname: "Sivakumar",
-    email: "dharunsivakumar002@gmail.com",
+    fname: JSON.parse(localStorage.getItem("user"))["fname"],
+    lname: JSON.parse(localStorage.getItem("user"))["lname"],
+    email: JSON.parse(localStorage.getItem("user"))["email"],
     month: "Mar",
   });
 
@@ -175,12 +175,62 @@ function Dashboard() {
     const [lname, setLname] = useState(profileData.lname);
     const [email, setEmail] = useState(profileData.email);
     const [phone, setPhone] = useState(profileData.phone);
-    const [day, setDay] = useState(profileData.day);
-    const [month, setMonth] = useState(profileData.month);
-    const [year, setYear] = useState(profileData.year);
-    const [city, setCity] = useState(profileData.city);
-    const [state, setState] = useState(profileData.state);
-    const [country, setCountry] = useState(profileData.country);
+    const [day, setDay] = useState("");
+    const [month, setMonth] = useState("");
+    const [year, setYear] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [country, setCountry] = useState("");
+
+    useEffect(() => {
+      fetch("http://localhost:8000/get_user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          setPhone(res.message.phone);
+          setDay(res.message.day);
+          setMonth(res.message.month);
+          setYear(res.message.year);
+          setCity(res.message.city);
+          setState(res.message.state);
+          setCountry(res.message.country);
+        });
+    }, []);
+
+    const updateProfile = () => {
+      let content = {
+        email: JSON.parse(localStorage.getItem("user"))["email"],
+        phone,
+        day,
+        month,
+        year,
+        city,
+        state,
+        country,
+      };
+      fetch("http://localhost:8000/update_user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(content),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          setPhone(res.message.phone);
+          setDay(res.message.day);
+          setMonth(res.message.month);
+          setYear(res.message.year);
+          setCity(res.message.city);
+          setState(res.message.state);
+          setCountry(res.message.country);
+        });
+    };
 
     return (
       <div className="TabProfile">
@@ -188,6 +238,9 @@ function Dashboard() {
           Profile
           <button
             onClick={() => {
+              if (!disabled) {
+                updateProfile();
+              }
               setDisabled(!disabled);
             }}
           >
