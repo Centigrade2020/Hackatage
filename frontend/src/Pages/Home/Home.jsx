@@ -415,7 +415,12 @@ function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ days: peopleCount, city, budget }),
+      body: JSON.stringify({
+        days: peopleCount,
+        city,
+        budget,
+        email: JSON.parse(localStorage.getItem("user"))["email"],
+      }),
     })
       .then((res) => res.json())
       .then((res) => {
@@ -648,7 +653,7 @@ function Home() {
 
               <button
                 onClick={() => {
-                  // handleClick();
+                  handleClick();
                   setOpenTP(true);
                 }}
               >
