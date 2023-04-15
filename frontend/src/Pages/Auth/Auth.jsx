@@ -40,6 +40,23 @@ function Auth() {
       .then((res) => console.log(res));
   };
 
+  const handleLogin = () => {
+    const content = {
+      email,
+      passwd,
+    };
+
+    fetch("http://localhost:8000/login_user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(content),
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res));
+  };
+
   return (
     <div className="Auth">
       {newUser ? (
@@ -65,7 +82,6 @@ function Auth() {
             ></input>
             <input
               placeholder="Password"
-              v
               value={passwd}
               onChange={(e) => setPasswd(e.target.value)}
               name="password"
@@ -92,17 +108,27 @@ function Auth() {
                 setNewUser(false);
               }}
             >
-              Login
+              Sign Up
             </a>
           </p>
         </>
       ) : (
         <>
           <form>
-            <input placeholder="Email" name="email"></input>
-            <input placeholder="Password" name="password"></input>
-            <button type="submit">Sign up</button>
+            <input
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+            ></input>
+            <input
+              placeholder="Password"
+              value={passwd}
+              onChange={(e) => setPasswd(e.target.value)}
+              name="password"
+            ></input>
           </form>
+          <button onClick={handleLogin}>Log in</button>
 
           <p>
             Not signed up?{" "}

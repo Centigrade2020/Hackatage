@@ -55,6 +55,11 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
+
+PASSWORD_HASHERS=[
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher'
+]
+
 ROOT_URLCONF = 'hackatoge.urls'
 
 TEMPLATES = [
