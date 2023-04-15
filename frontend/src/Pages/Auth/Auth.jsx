@@ -4,18 +4,74 @@ import "./Auth.css";
 
 function Auth() {
   const [newUser, setNewUser] = useState(false);
+  const [email, setEmail] = useState("");
+  const [lname, setLname] = useState("");
+  const [fname, setFname] = useState("");
+  const [passwd, setPasswd] = useState("");
+  const [cnfPass, setCnfPass] = useState("");
+
+  const handleRegister = () => {
+    const content = {
+      fname,
+      lname,
+      email,
+      passwd,
+    };
+
+    fetch("http://localhost:8000/create_user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(content),
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res));
+  };
   return (
     <div className="Auth">
       {newUser ? (
         <>
           <form>
-            <input placeholder="Email" name="email"></input>
-            <input placeholder="First Name" name="fname"></input>
-            <input placeholder="Last Name" name="lname"></input>
-            <input placeholder="Password" name="password"></input>
-            <input placeholder="Confirm password" name="cpassword"></input>
-            <button type="submit">Login</button>
+            <input
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+            ></input>
+            <input
+              placeholder="First Name"
+              value={lname}
+              onChange={(e) => setLname(e.target.value)}
+              name="fname"
+            ></input>
+            <input
+              placeholder="Last Name"
+              value={fname}
+              onChange={(e) => setFname(e.target.value)}
+              name="lname"
+            ></input>
+            <input
+              placeholder="Password"
+              v
+              value={passwd}
+              onChange={(e) => setPasswd(e.target.value)}
+              name="password"
+            ></input>
+            <input
+              placeholder="Confirm password"
+              value={cnfPass}
+              onChange={(e) => setCnfPass(e.target.value)}
+              name="cpassword"
+            ></input>
           </form>
+          <button
+            onClick={() => {
+              handleRegister();
+            }}
+          >
+            Login
+          </button>
 
           <p>
             Already signed up?{" "}
