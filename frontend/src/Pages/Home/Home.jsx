@@ -405,11 +405,28 @@ function Home() {
   const [city, setCity] = useState("");
   const [peopleCount, setPeopleCount] = useState("");
   const [budget, setBudget] = useState(10000);
-
+  const [data, setData] = useState();
   const [openTP, setOpenTP] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const handleClick = () => {
+    fetch("http://localhost:8000/ask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ days: peopleCount, city, budget }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setLoading(false);
+        setData(JSON.parse(res));
+        console.log(JSON.parse(res));
+        console.log(data);
+      });
+  };
 
   const TripPlanner = () => {
-    const [loading, setLoading] = useState(false);
     return (
       <div className="TripPlanner">
         <div className="tpDisplay">
@@ -429,7 +446,7 @@ function Home() {
                 </span>
               </h1>
               <div className="packagesDisplayTP">
-                {recommendedData.map((i, k) => (
+                {data.map((i, k) => (
                   <div
                     className="package"
                     onClick={() => {
@@ -458,7 +475,7 @@ function Home() {
       {openTP && <TripPlanner />}
       <div className="Home">
         <div className="homeHeader">
-          <img src={vacation1} alt="vacation1" />
+          <img src={vacation1} alt="" />
           <div className="overlay"></div>
           <div className="content">
             <h1>
@@ -608,6 +625,7 @@ function Home() {
 
               <button
                 onClick={() => {
+                  handleClick();
                   setOpenTP(true);
                 }}
               >
