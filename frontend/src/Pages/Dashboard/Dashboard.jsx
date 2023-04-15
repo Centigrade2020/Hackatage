@@ -88,6 +88,84 @@ function Dashboard() {
       ],
       key: "3-london,uk",
     },
+    {
+      _id: "6424d2b113185d8420fdb6fc",
+      name: "London trip",
+      plan: [
+        {
+          day: 1,
+          activities: [
+            {
+              time: "9:00 AM",
+              description: "Arrive in London and check-in to hotel",
+            },
+            {
+              time: "11:00 AM",
+              description: "Visit the British Museum",
+            },
+            {
+              time: "2:00 PM",
+              description: "Take a tour of the Tower of London",
+            },
+            {
+              time: "6:00 PM",
+              description: "Take a stroll through Hyde Park",
+            },
+          ],
+        },
+        {
+          day: 2,
+          activities: [
+            {
+              time: "9:00 AM",
+              description: "Visit Buckingham Palace",
+            },
+            {
+              time: "11:00 AM",
+              description: "Explore the famous Trafalgar Square",
+            },
+            {
+              time: "2:00 PM",
+              description: "Have lunch at Covent Garden Market",
+            },
+            {
+              time: "4:00 PM",
+              description: "Visit the London Eye",
+            },
+            {
+              time: "6:00 PM",
+              description: "Take a walk along the River Thames",
+            },
+          ],
+        },
+        {
+          day: 3,
+          activities: [
+            {
+              time: "9:00 AM",
+              description: "Visit the Houses of Parliament",
+            },
+            {
+              time: "11:00 AM",
+              description: "Take a tour of Westminster Abbey",
+            },
+            {
+              time: "2:00 PM",
+              description: "Visit the Tate Modern art museum",
+            },
+            {
+              time: "5:00 PM",
+              description: "Enjoy a traditional English afternoon tea",
+            },
+            {
+              time: "7:00 PM",
+              description: "Watch a musical performance at the West End",
+            },
+          ],
+        },
+      ],
+      key: "3-london,uk",
+    },
   ]);
 
   const TabProfile = () => {
@@ -327,29 +405,36 @@ function Dashboard() {
             <h3>Booking ID</h3>
             <p>{obj._id}</p>
           </label>
-          <button
-            onClick={() => {
-              setShowPlan(!showPlan);
-            }}
-          >
-            {!showPlan ? (
-              <>
-                <span class="material-symbols-outlined">visibility</span>
-                Show plan
-              </>
-            ) : (
-              <>
-                <span class="material-symbols-outlined">visibility_off</span>
-                Hide plan
-              </>
-            )}
-          </button>
+          <div className="bbuttons">
+            <button
+              onClick={() => {
+                setShowPlan(!showPlan);
+              }}
+            >
+              {!showPlan ? (
+                <>
+                  <span class="material-symbols-outlined">visibility</span>
+                  Show plan
+                </>
+              ) : (
+                <>
+                  <span class="material-symbols-outlined">visibility_off</span>
+                  Hide plan
+                </>
+              )}
+            </button>
+            <button>
+              <span class="material-symbols-outlined">share</span> Share
+            </button>
+          </div>
         </div>
         <div className="dayRows">
           {showPlan &&
             obj.plan.map((day, i) => (
               <div className="dayRow" key={i}>
-                <p>Day {day.day}</p>
+                <p>
+                  <p>Day</p> <p>{day.day}</p>
+                </p>
                 <div className="activities">
                   {day.activities.map((activity, k) => (
                     <div className="activity">

@@ -52,6 +52,7 @@
 .TabProfile {
   width: 100%;
   height: 100%;
+  height: calc(100vh - var(--navbarHeight));
   background-color: white;
   padding: 20px 50px;
 }
@@ -158,8 +159,10 @@
 .TabBookings {
   width: 100%;
   height: 100%;
+  height: calc(100vh - var(--navbarHeight));
   background-color: white;
   padding: 20px 50px;
+  overflow-y: scroll;
 }
 
 .TabBookings > h1 {
@@ -181,24 +184,30 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
+.Booking .bheader .bbuttons {
+  display: flex;
+  gap: 20px;
+}
+
 .Booking .bheader button {
-  padding: 10px 20px;
+  padding: 8px 16px;
   width: 150px;
   outline: none;
   border: none;
-  background-color: var(--blue);
-  color: var(--darkGray);
+  background-color: white;
+  color: var(--blue);
   font-size: 1rem;
+  font-weight: 500;
   display: grid;
   grid-template-columns: 1fr 3fr;
   place-items: center;
-  gap: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   transition: all 200ms ease-in-out;
 }
 
 .Booking .bheader button:hover {
   cursor: pointer;
-  color: aliceblue;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .Booking .bheader label h3 {
@@ -214,6 +223,7 @@
 
 .Booking .dayRows {
   width: 100%;
+  padding-top: 20px;
 }
 
 .Booking .dayRows .dayRow {
@@ -222,10 +232,24 @@
   align-items: center;
 }
 
+.Booking .dayRows .dayRow > p {
+  place-self: start;
+  padding: 20px;
+  width: max-content;
+  display: flex;
+  gap: 5px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.Booking .dayRows .dayRow:nth-child(odd) {
+  background-color: aliceblue;
+}
+
 .Booking .dayRows .dayRow .activities {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .Booking .dayRows .dayRow .activities .activity {
@@ -241,4 +265,5 @@
 .Booking .dayRows .dayRow .activities .activity h3 {
   font-weight: 500;
   color: black;
+  font-size: 1rem;
 }
