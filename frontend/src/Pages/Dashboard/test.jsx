@@ -295,16 +295,19 @@ const Test = () => {
       value: "",
     },
   ]);
-  const options = {
-    method: "GET",
-    // url: "https://timetable-lookup.p.rapidapi.com/TimeTable/MAA/DEL/20230420/",
-    params: { Results: "3", Max_Results: "3" },
-    headers: {
-      "X-RapidAPI-Key": "54fb866cd8mshb99f4f47ec1655ap117b34jsnd2baed40b395",
-      "X-RapidAPI-Host": "timetable-lookup.p.rapidapi.com",
-      "Content-Type": "application/json",
-    },
-  };
+
+// Flight
+
+//   const options = {
+//     method: "GET",
+//     // url: "https://timetable-lookup.p.rapidapi.com/TimeTable/MAA/DEL/20230420/",
+//     params: { Results: "3", Max_Results: "3" },
+//     headers: {
+//       "X-RapidAPI-Key": "54fb866cd8mshb99f4f47ec1655ap117b34jsnd2baed40b395",
+//       "X-RapidAPI-Host": "timetable-lookup.p.rapidapi.com",
+//       "Content-Type": "application/json",
+//     },
+//   };
   //   useEffect(() => {
   //     axios
   //       .request(options)
@@ -318,36 +321,54 @@ const Test = () => {
   //         console.error(error);
   //       });
   //   }, []);
+  const options = {
+    method: 'GET',
+    url: 'https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation',
+    params: {cityName: 'Paris', countryName: 'France'},
+    headers: {
+      'X-RapidAPI-Key': '54fb866cd8mshb99f4f47ec1655ap117b34jsnd2baed40b395',
+      'X-RapidAPI-Host': 'best-booking-com-hotel.p.rapidapi.com'
+    }
+  };
+  
+  axios.request(options).then(function (response) {
+      console.log(response.data);
+  }).catch(function (error) {
+      console.error(error);
+  });
   return (
     <div>
       Test
-      {console.log(flightData)}
-      {flightData.map((index, key) =>
-        index.children.slice(2).map((i, k) => (
-          <>
-            {i.children.map((val, ke) => (
-              <>
-                <h1>{val.attributes.FLSUUID}</h1>
-                <h1>{val.children[2].attributes.CompanyShortName}</h1>
-              </>
-            ))}
-            <p>{i.attributes.TotalFlightTime}</p>
-            <p>{i.attributes.TotalMiles}</p>
-            <p>{i.attributes.FLSDepartureCode}</p>
-            <p>{i.attributes.FLSDepartureDateTime}</p>
-            <p>{i.attributes.FLSDepartureName}</p>
-            <p>{i.attributes.FLSArrivalCode}</p>
-            <p>{i.attributes.FLSArrivalDateTime}</p>
-            <p>{i.attributes.FLSArrivalName}</p>
-            <p>{i.attributes.FLSFlightType}</p>
-            <p>{i.attributes.FLSFlightLegs}</p>
 
-            <br></br>
-          </>
-        ))
-      )}
-    </div>
+          </div>
   );
 };
 
 export default Test;
+// Flight
+
+// {console.log(flightData)}
+//       {flightData.map((index, key) =>
+//         index.children.slice(2).map((i, k) => (
+//           <>
+//             {i.children.map((val, ke) => (
+//               <>
+//                 <h1>{val.attributes.FLSUUID}</h1>
+//                 <h1>{val.children[2].attributes.CompanyShortName}</h1>
+//               </>
+//             ))}
+//             <p>{i.attributes.TotalFlightTime}</p>
+//             <p>{i.attributes.TotalMiles}</p>
+//             <p>{i.attributes.FLSDepartureCode}</p>
+//             <p>{i.attributes.FLSDepartureDateTime}</p>
+//             <p>{i.attributes.FLSDepartureName}</p>
+//             <p>{i.attributes.FLSArrivalCode}</p>
+//             <p>{i.attributes.FLSArrivalDateTime}</p>
+//             <p>{i.attributes.FLSArrivalName}</p>
+//             <p>{i.attributes.FLSFlightType}</p>
+//             <p>{i.attributes.FLSFlightLegs}</p>
+
+//             <br></br>
+//           </>
+//         ))
+//       )}

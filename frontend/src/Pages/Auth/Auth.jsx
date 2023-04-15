@@ -54,7 +54,13 @@ function Auth() {
       body: JSON.stringify(content),
     })
       .then((res) => res.json())
-      .then((res) => console.log(res));
+      .then((res) => {
+        localStorage.setItem("userId", res.message._id["$oid"]);
+        localStorage.setItem("isAuthenticated", res.message.is_authenticated);
+        localStorage.setItem("user", JSON.stringify(res.message));
+        console.log(res.message);
+        console.log(JSON.parse(localStorage.getItem("user")));
+      });
   };
   // client_id=304531247476-58f940f3b0dgrupg95cdo8b51fspupdv.apps.googleusercontent.com
 
@@ -77,17 +83,35 @@ function Auth() {
               <form>
                 <label>
                   <p>Enter your email</p>{" "}
-                  <input type="email" placeholder="Email" name="email" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    name="email"
+                  />
                 </label>
 
                 <div>
                   <label>
                     <p>First name</p>{" "}
-                    <input type="text" placeholder="First name" name="fname" />
+                    <input
+                      type="text"
+                      value={lname}
+                      onChange={(e) => setLname(e.target.value)}
+                      placeholder="First name"
+                      name="fname"
+                    />
                   </label>
                   <label>
                     <p>Last name</p>{" "}
-                    <input type="text" placeholder="Last name" name="lname" />
+                    <input
+                      type="text"
+                      value={fname}
+                      onChange={(e) => setFname(e.target.value)}
+                      placeholder="Last name"
+                      name="lname"
+                    />
                   </label>
                 </div>
 
@@ -95,6 +119,8 @@ function Auth() {
                   <p>Password</p>{" "}
                   <input
                     type="password"
+                    value={passwd}
+                    onChange={(e) => setPasswd(e.target.value)}
                     placeholder="Password"
                     name="password"
                   />
@@ -104,6 +130,8 @@ function Auth() {
                   <p>Confirm password</p>{" "}
                   <input
                     type="password"
+                    value={cnfPass}
+                    onChange={(e) => setCnfPass(e.target.value)}
                     placeholder="Confirm password"
                     name="cpassword"
                   />
@@ -145,12 +173,20 @@ function Auth() {
               <form>
                 <label>
                   <p>Enter your email</p>{" "}
-                  <input type="email" placeholder="Email" name="email" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    name="email"
+                  />
                 </label>
                 <label>
                   <p>Enter your password</p>{" "}
                   <input
                     type="password"
+                    value={passwd}
+                    onChange={(e) => setPasswd(e.target.value)}
                     placeholder="Password"
                     name="password"
                   />
