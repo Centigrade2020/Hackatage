@@ -59,6 +59,7 @@
   background-color: white;
   padding: 30px;
   scale: 0.8;
+  width: 100%;
 }
 
 /* .Auth .authHeader .authCard > h1 {
@@ -66,7 +67,7 @@
 } */
 
 .Auth .authHeader .authCard form {
-  width: 400px;
+  width: 500px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -93,6 +94,17 @@
   outline: none;
   border: 2px solid var(--darkBlue);
   transition: all 200ms ease-in-out;
+}
+
+.Auth .authHeader .authCard form > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.Auth .authHeader .authCard form > div label,
+.Auth .authHeader .authCard form > div label input {
+  width: 100%;
 }
 
 .Auth .authHeader .authCard button {

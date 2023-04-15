@@ -80,14 +80,16 @@ function Auth() {
                   <input type="email" placeholder="Email" name="email" />
                 </label>
 
-                <label>
-                  <p>First name</p>{" "}
-                  <input type="text" placeholder="First name" name="fname" />
-                </label>
-                <label>
-                  <p>Last name</p>{" "}
-                  <input type="text" placeholder="Last name" name="lname" />
-                </label>
+                <div>
+                  <label>
+                    <p>First name</p>{" "}
+                    <input type="text" placeholder="First name" name="fname" />
+                  </label>
+                  <label>
+                    <p>Last name</p>{" "}
+                    <input type="text" placeholder="Last name" name="lname" />
+                  </label>
+                </div>
 
                 <label>
                   <p>Password</p>{" "}
@@ -133,7 +135,7 @@ function Auth() {
                 onError={() => {
                   console.log("Login Failed");
                 }}
-                width="400px"
+                width="500px"
               />
             </div>
           ) : (
@@ -179,7 +181,7 @@ function Auth() {
                 onError={() => {
                   console.log("Login Failed");
                 }}
-                width="400px"
+                width="1000px"
               />
             </div>
           )}
