@@ -59,7 +59,6 @@
   background-color: white;
   padding: 30px;
   scale: 0.8;
-  width: 100%;
 }
 
 /* .Auth .authHeader .authCard > h1 {
@@ -67,7 +66,7 @@
 } */
 
 .Auth .authHeader .authCard form {
-  width: 500px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   gap: 20px;

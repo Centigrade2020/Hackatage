@@ -181,7 +181,7 @@ function Auth() {
                 onError={() => {
                   console.log("Login Failed");
                 }}
-                width="1000px"
+                width="400px"
               />
             </div>
           )}
