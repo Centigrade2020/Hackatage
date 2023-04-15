@@ -60,6 +60,7 @@ function Auth() {
         localStorage.setItem("user", JSON.stringify(res.message));
         console.log(res.message);
         console.log(JSON.parse(localStorage.getItem("user")));
+        navigate("/");
       });
   };
   // client_id=304531247476-58f940f3b0dgrupg95cdo8b51fspupdv.apps.googleusercontent.com
