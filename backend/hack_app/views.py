@@ -239,7 +239,7 @@ def ask_ai(request):
         
     reply = chat.choices[0].message.content
     print(json.dumps(reply))
-    return Response(reply.strip(    ))
+    return Response(reply.strip())
 
 @api_view(["POST"])
 @parser_classes([JSONParser])

@@ -450,7 +450,8 @@ function Home() {
                   <div
                     className="package"
                     onClick={() => {
-                      navigate("/searchTickets");
+                    window.open("/searchTickets", "_blank");
+
                     }}
                   >
                     <div className="img">
@@ -497,7 +498,7 @@ function Home() {
                 <div
                   className="package"
                   onClick={() => {
-                    navigate("/searchTickets");
+                    window.open("/searchTickets", "_blank");
                   }}
                 >
                   <div className="img">
