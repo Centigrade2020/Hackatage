@@ -1,0 +1,12 @@
+.Home .columns{
+    display: flex;
+    flex-direction: row;    
+}
+.Home .columns .right {
+    display: flex;
+    flex-direction: column;     
+}
+.Home .columns .right form{
+    display: flex;
+    flex-direction: column;
+}
