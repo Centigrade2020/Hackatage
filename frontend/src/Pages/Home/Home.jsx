@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
 
 import vacation1 from "../../Assets/vacation1.jpg";
+import dubai from "../../Assets/dubai.jpg";
 
 function Home() {
+  const navigate = useNavigate();
+
   // let permission = Notification.requestPermission();
   // const notification =new Notification("4:00");
 
@@ -398,41 +402,98 @@ function Home() {
     },
   ];
 
-  const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [budget, setBudget] = useState(1);
+  const [peopleCount, setPeopleCount] = useState("");
+  const [budget, setBudget] = useState(10000);
 
-  return (
-    <div className="Home">
-      <div className="homeHeader">
-        <img src={vacation1} alt="" />
-        <div className="overlay"></div>
-        <div className="content">
-          <h1>
-            Discover Awesome Trips You
-            <br />
-            Have Never Seen
-          </h1>
-          <p>
-            Jobs fill your pockets, adventures fill your soul, <br /> Remember
-            that happiness is a way of travel, not a destination.
-          </p>
+  const [openTP, setOpenTP] = useState(false);
+
+  const TripPlanner = () => {
+    const [loading, setLoading] = useState(false);
+    return (
+      <div className="TripPlanner">
+        <div className="tpDisplay">
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <>
+              <h1>
+                Trips we found for you{" "}
+                <span
+                  class="material-symbols-outlined bigIcon"
+                  onClick={() => {
+                    setOpenTP(false);
+                  }}
+                >
+                  close
+                </span>
+              </h1>
+              <div className="packagesDisplayTP">
+                {recommendedData.map((i, k) => (
+                  <div
+                    className="package"
+                    onClick={() => {
+                      navigate("/searchTickets");
+                    }}
+                  >
+                    <div className="img">
+                      <img src={dubai} alt="dubai" />
+                      <p className="pdDays">{i.plan.length} Days</p>
+                    </div>
+                    <div className="content">
+                      <h2>{i.key}</h2>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
-      <div className="columns">
-        <div className="left">
-          <h1>Popular packages</h1>
-          <div className="packagesDisplay">
-            {recommendedData.map((i, k) => (
-              <div className="package">
-                <div className="img"></div>
-                <div className="content">
-                  <h2>{i.key}</h2>
-                </div>
-              </div>
-            ))}
+    );
+  };
+
+  return (
+    <>
+      {openTP && <TripPlanner />}
+      <div className="Home">
+        <div className="homeHeader">
+          <img src={vacation1} alt="" />
+          <div className="overlay"></div>
+          <div className="content">
+            <h1>
+              Discover Awesome Trips You
+              <br />
+              Have Never Seen
+            </h1>
+            <p>
+              Jobs fill your pockets, adventures fill your soul, <br /> Remember
+              that happiness is a way of travel, not a destination.
+            </p>
           </div>
-          {/* {recommendedData.map((i, k) => (
+        </div>
+        <div className="columns">
+          <div className="left">
+            <h1>Popular packages</h1>
+            <div className="packagesDisplay">
+              {recommendedData.map((i, k) => (
+                <div
+                  className="package"
+                  onClick={() => {
+                    navigate("/searchTickets");
+                  }}
+                >
+                  <div className="img">
+                    <img src={dubai} alt="dubai" />
+                    <p className="pdDays">{i.plan.length} Days</p>
+                  </div>
+                  <div className="content">
+                    <h2>{i.key}</h2>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {/* {recommendedData.map((i, k) => (
             <>
               <h2>{i.key}</h2>
               {i.plan.map((index, key) => (
@@ -448,65 +509,116 @@ function Home() {
               ))}
             </>
           ))} */}
-        </div>
-        <div className="right">
-          <div className="HrithikTab">
-            <div className="content">
-              <form>
-                <label>
-                  <p>Country</p>{" "}
-                  <input
-                    type="text"
-                    placeholder="Country"
-                    name="country"
-                    value={country}
-                    onChange={(e) => {
-                      setCountry(e.target.value);
-                    }}
-                  />
-                </label>
+          </div>
+          <div className="right">
+            <h1>Plan your Trip</h1>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <label>
+                <p>Which city would you like to visit?</p>{" "}
+                <input
+                  type="text"
+                  placeholder="City"
+                  name="city"
+                  value={city}
+                  onChange={(e) => {
+                    setCity(e.target.value);
+                  }}
+                />
+              </label>
 
-                <label>
-                  <p>City</p>{" "}
-                  <input
-                    type="text"
-                    placeholder="City"
-                    name="city"
-                    value={city}
-                    onChange={(e) => {
-                      setCity(e.target.value);
-                    }}
-                  />
-                </label>
+              <label>
+                <p>How many people?</p>{" "}
+                <input
+                  type="number"
+                  placeholder="Count"
+                  name="count"
+                  value={peopleCount}
+                  onChange={(e) => {
+                    setPeopleCount(e.target.value);
+                  }}
+                />
+              </label>
 
-                {/* <label>
+              {/* <label>
                   IATA code<input placeholder="IATA code"></input>
                 </label> */}
 
-                <label>
-                  1000{" "}
-                  <input
-                    placeholder="Budget"
-                    type="range"
-                    onChange={(e) => {
-                      setBudget(e.target.value);
-                      // console.log(budget);
-                    }}
-                    title={budget * 1000}
-                    min="1"
-                    max="10"
-                  ></input>
-                  10000
-                </label>
-                <p>{budget * 1000}</p>
+              {/* <label>
+              1000{" "}
+              <input
+                placeholder="Budget"
+                type="range"
+                onChange={(e) => {
+                  setBudget(e.target.value);
+                  // console.log(budget);
+                }}
+                title={budget * 1000}
+                min="1"
+                max="10"
+              ></input>
+              10000
+            </label>
+            <p>{budget * 1000}</p> */}
 
-                <button>Plan your trip</button>
-              </form>
-            </div>
+              <label>
+                <p>What is your budget?</p>
+                <div className="buttonsDisplay">
+                  <button
+                    value={10000}
+                    className={budget == 10000 ? "selectedBud" : "bud"}
+                    onClick={(e) => {
+                      setBudget(e.target.value);
+                    }}
+                  >
+                    10,000 Rs
+                  </button>
+                  <button
+                    value={20000}
+                    className={budget == 20000 ? "selectedBud" : "bud"}
+                    onClick={(e) => {
+                      setBudget(e.target.value);
+                    }}
+                  >
+                    20,000 Rs
+                  </button>
+                  <button
+                    value={30000}
+                    className={budget == 30000 ? "selectedBud" : "bud"}
+                    onClick={(e) => {
+                      setBudget(e.target.value);
+                    }}
+                  >
+                    30,000 Rs
+                  </button>
+                  <button
+                    value={30001}
+                    className={budget == 30001 ? "selectedBud" : "bud"}
+                    onClick={(e) => {
+                      setBudget(e.target.value);
+                    }}
+                  >
+                    {">"}30,000 Rs
+                  </button>
+                </div>
+              </label>
+
+              <button
+                onClick={() => {
+                  setOpenTP(true);
+                }}
+              >
+                <span className="material-symbols-outlined">manage_search</span>{" "}
+                Plan your trip
+              </button>
+            </form>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
