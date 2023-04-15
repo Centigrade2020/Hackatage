@@ -132,7 +132,7 @@
   font-weight: 600;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
   .Auth .authHeader img {
     height: 100%;
     width: auto;
