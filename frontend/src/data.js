@@ -5,7 +5,7 @@ export const pages = [
     show: true,
   },
   {
-    name: "Auth",
+    name: "Login/Signup",
     path: "/auth",
     show: true,
   },

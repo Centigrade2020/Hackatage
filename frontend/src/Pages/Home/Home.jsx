@@ -458,7 +458,7 @@ function Home() {
       {openTP && <TripPlanner />}
       <div className="Home">
         <div className="homeHeader">
-          <img src={vacation1} alt="" />
+          <img src={vacation1} alt="vacation1" />
           <div className="overlay"></div>
           <div className="content">
             <h1>

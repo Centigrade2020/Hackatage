@@ -6,7 +6,7 @@ import "./Navbar.css";
 function Navbar() {
   const navigate = useNavigate();
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const [name, setName] = useState("Username");
 

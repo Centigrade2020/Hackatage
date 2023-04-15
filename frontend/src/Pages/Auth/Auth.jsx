@@ -2,6 +2,8 @@ import { useState } from "react";
 import React from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 
+import authbg from "../../Assets/authbg.jpg";
+
 import "./Auth.css";
 
 function Auth() {
@@ -57,102 +59,133 @@ function Auth() {
   // client_id=304531247476-58f940f3b0dgrupg95cdo8b51fspupdv.apps.googleusercontent.com
 
   return (
-    <GoogleOAuthProvider clientId="983222062492-hg2nks96hdo66l7roqsgtltglblv0138.apps.googleusercontent.com">
-      <div className="Auth">
-        {newUser ? (
-          <>
-            <form>
-              <input
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                name="email"
-              ></input>
-              <input
-                placeholder="First Name"
-                value={lname}
-                onChange={(e) => setLname(e.target.value)}
-                name="fname"
-              ></input>
-              <input
-                placeholder="Last Name"
-                value={fname}
-                onChange={(e) => setFname(e.target.value)}
-                name="lname"
-              ></input>
-              <input
-                placeholder="Password"
-                value={passwd}
-                onChange={(e) => setPasswd(e.target.value)}
-                name="password"
-              ></input>
-              <input
-                placeholder="Confirm password"
-                value={cnfPass}
-                onChange={(e) => setCnfPass(e.target.value)}
-                name="cpassword"
-              ></input>
-            </form>
-            <button
-              onClick={() => {
-                handleRegister();
-              }}
-            >
-              Login
-            </button>
+    <div className="Auth">
+      <GoogleOAuthProvider clientId="983222062492-hg2nks96hdo66l7roqsgtltglblv0138.apps.googleusercontent.com">
+        <div className="authHeader">
+          <img src={authbg} alt="authbg" />
+          <div className="overlay"></div>
+          <div className="content">
+            <h1>
+              Not all those who wander <br /> are lost
+            </h1>
+            <p>Login to get full access to our application</p>
+          </div>
 
-            <p>
-              Already signed up?{" "}
-              <a
+          {newUser ? (
+            <div className="authCard">
+              <h1>Signup</h1>
+              <form>
+                <label>
+                  <p>Enter your email</p>{" "}
+                  <input type="email" placeholder="Email" name="email" />
+                </label>
+
+                <label>
+                  <p>First name</p>{" "}
+                  <input type="text" placeholder="First name" name="fname" />
+                </label>
+                <label>
+                  <p>Last name</p>{" "}
+                  <input type="text" placeholder="Last name" name="lname" />
+                </label>
+
+                <label>
+                  <p>Password</p>{" "}
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                  />
+                </label>
+
+                <label>
+                  <p>Confirm password</p>{" "}
+                  <input
+                    type="password"
+                    placeholder="Confirm password"
+                    name="cpassword"
+                  />
+                </label>
+              </form>
+              <button
                 onClick={() => {
-                  setNewUser(false);
+                  handleRegister();
                 }}
               >
-                Sign Up
-              </a>
-            </p>
-          </>
-        ) : (
-          <>
-            <form>
-              <input
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                name="email"
-              ></input>
-              <input
-                placeholder="Password"
-                value={passwd}
-                onChange={(e) => setPasswd(e.target.value)}
-                name="password"
-              ></input>
-            </form>
-            <button onClick={handleLogin}>Log in</button>
+                Sign up
+              </button>
 
-            <p>
-              Not signed up?{" "}
-              <a
+              <p>
+                Already signed up?{" "}
+                <a
+                  onClick={() => {
+                    setNewUser(false);
+                  }}
+                >
+                  Login
+                </a>
+              </p>
+
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+                width="400px"
+              />
+            </div>
+          ) : (
+            <div className="authCard">
+              <h1>Login</h1>
+
+              <form>
+                <label>
+                  <p>Enter your email</p>{" "}
+                  <input type="email" placeholder="Email" name="email" />
+                </label>
+                <label>
+                  <p>Enter your password</p>{" "}
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                  />
+                </label>
+              </form>
+              <button
                 onClick={() => {
-                  setNewUser(true);
+                  handleLogin();
                 }}
               >
-                Signup
-              </a>
-            </p>
-          </>
-        )}
+                Log in
+              </button>
 
-        <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
-      </div>
-    </GoogleOAuthProvider>
+              <p>
+                Not signed up?{" "}
+                <a
+                  onClick={() => {
+                    setNewUser(true);
+                  }}
+                >
+                  Signup
+                </a>
+              </p>
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+                width="400px"
+              />
+            </div>
+          )}
+        </div>
+      </GoogleOAuthProvider>
+    </div>
   );
 }
 

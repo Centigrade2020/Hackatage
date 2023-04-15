@@ -1,0 +1,121 @@
+.Auth {
+  width: 100%;
+  height: calc(100vh - var(--navbarHeight));
+}
+
+.Auth .authHeader {
+  width: 100%;
+  height: calc(100vh - var(--navbarHeight));
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+}
+
+.Auth .authHeader .content {
+  position: relative;
+  z-index: 2;
+}
+.Auth .authHeader .content h1 {
+  color: aliceblue;
+  font-size: 3rem;
+  text-align: left;
+}
+
+.Auth .authHeader .content p {
+  color: rgb(219, 225, 232);
+  padding-top: 10px;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.Auth .authHeader img {
+  width: 100%;
+  transform: translateY(-30%);
+  /* filter: brightness(0.4); */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.Auth .authHeader .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--darkBlue);
+  z-index: 1;
+  opacity: 0.75;
+}
+
+.Auth .authHeader .authCard {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: white;
+  padding: 30px;
+}
+
+/* .Auth .authHeader .authCard > h1 {
+  padding-bottom: 20px;
+} */
+
+.Auth .authHeader .authCard form {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.Auth .authHeader .authCard form label p {
+  color: gray;
+  font-size: 0.8rem;
+  padding-bottom: 3px;
+}
+
+.Auth .authHeader .authCard form label input {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: 2px solid rgb(228, 228, 228);
+  transition: all 200ms ease-in-out;
+  font-size: 1rem;
+}
+
+.Auth .authHeader .authCard form label input:focus {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: 2px solid var(--darkBlue);
+  transition: all 200ms ease-in-out;
+}
+
+.Auth .authHeader .authCard button {
+  padding: 8px;
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: var(--blue);
+  color: aliceblue;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  transition: all 200ms ease-in-out;
+}
+
+.Auth .authHeader .authCard > p {
+  text-align: center;
+}
+
+.Auth .authHeader .authCard > p a {
+  color: var(--blue);
+  font-weight: 600;
+}
