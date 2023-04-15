@@ -1,10 +1,11 @@
 import { useState } from "react";
 import React from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-
+import {useNavigate} from "react-router-dom"
 import authbg from "../../Assets/authbg.jpg";
 
 import "./Auth.css";
+
 
 function Auth() {
   const [newUser, setNewUser] = useState(false);
@@ -20,6 +21,7 @@ function Auth() {
   //   select_by: "btn",
   //   // redirect_uris: ["http://localhost:3000/auth/google/callback"],
   // };
+  const navigate = useNavigate()
 
   const handleRegister = () => {
     const content = {

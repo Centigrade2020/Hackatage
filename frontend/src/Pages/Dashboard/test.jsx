@@ -1,6 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import XMLParser from "react-xml-parser";
+import {
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+  PDFDownloadLink,
+} from "@react-pdf/renderer";
 
 const Test = () => {
   const [flightData, setFlightData] = useState([
@@ -295,19 +303,29 @@ const Test = () => {
       value: "",
     },
   ]);
+  const styles = StyleSheet.create({
+    page: {
+      flexDirection: "row",
+      backgroundColor: "#E4E4E4",
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+      flexGrow: 1,
+    },
+  });
+  // Flight
 
-// Flight
-
-//   const options = {
-//     method: "GET",
-//     // url: "https://timetable-lookup.p.rapidapi.com/TimeTable/MAA/DEL/20230420/",
-//     params: { Results: "3", Max_Results: "3" },
-//     headers: {
-//       "X-RapidAPI-Key": "54fb866cd8mshb99f4f47ec1655ap117b34jsnd2baed40b395",
-//       "X-RapidAPI-Host": "timetable-lookup.p.rapidapi.com",
-//       "Content-Type": "application/json",
-//     },
-//   };
+  //   const options = {
+  //     method: "GET",
+  //     // url: "https://timetable-lookup.p.rapidapi.com/TimeTable/MAA/DEL/20230420/",
+  //     params: { Results: "3", Max_Results: "3" },
+  //     headers: {
+  //       "X-RapidAPI-Key": "54fb866cd8mshb99f4f47ec1655ap117b34jsnd2baed40b395",
+  //       "X-RapidAPI-Host": "timetable-lookup.p.rapidapi.com",
+  //       "Content-Type": "application/json",
+  //     },
+  //   };
   //   useEffect(() => {
   //     axios
   //       .request(options)
@@ -321,26 +339,40 @@ const Test = () => {
   //         console.error(error);
   //       });
   //   }, []);
-  const options = {
-    method: 'GET',
-    url: 'https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation',
-    params: {cityName: 'Paris', countryName: 'France'},
-    headers: {
-      'X-RapidAPI-Key': '54fb866cd8mshb99f4f47ec1655ap117b34jsnd2baed40b395',
-      'X-RapidAPI-Host': 'best-booking-com-hotel.p.rapidapi.com'
-    }
-  };
-  
-  axios.request(options).then(function (response) {
-      console.log(response.data);
-  }).catch(function (error) {
-      console.error(error);
-  });
+  // import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+
   return (
     <div>
-      Test
-
-          </div>
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <View style={styles.section}>
+            <Text>Section #1</Text>
+          </View>
+          <View style={styles.section}>
+            <Text>Section #2</Text>
+          </View>
+        </Page>
+      </Document>
+      <PDFDownloadLink
+        document={
+          <Document>
+            <Page size="A4" style={styles.page}>
+              <View style={styles.section}>
+                <Text>Section #1</Text>
+              </View>
+              <View style={styles.section}>
+                <Text>Section #2</Text>
+              </View>
+            </Page>
+          </Document>
+        }
+        fileName="fee_acceptance.pdf"
+      >
+        {({ blob, url, loading, error }) =>
+          loading ? "Loading document..." : "Download now!"
+        }
+      </PDFDownloadLink>
+    </div>
   );
 };
 

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { pages } from "../../data";
 import "./Navbar.css";
 
+
 function Navbar() {
   const navigate = useNavigate();
 
@@ -48,7 +49,7 @@ function Navbar() {
             <NavLink name={"Home"} path={"/"} />
           </li>
           <li>
-            <NavLink name={"Username"} path={"/dashboard"} />
+            <NavLink name={JSON.parse(localStorage.getItem("user"))["fname"]+" "+JSON.parse(localStorage.getItem("user"))["lname"]} path={"/dashboard"} />
           </li>
         </ul>
       ) : (
