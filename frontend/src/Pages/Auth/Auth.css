@@ -131,3 +131,44 @@
   color: var(--blue);
   font-weight: 600;
 }
+
+@media screen and (max-width: 400px) {
+  .Auth .authHeader img {
+    height: 100%;
+    width: auto;
+    transform: translateY(0%);
+  }
+
+  .Auth .authHeader .content {
+    display: none;
+  }
+
+  .Auth .authHeader {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .Auth .authHeader .authCard {
+    width: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    padding: 30px;
+    scale: 0.8;
+  }
+
+  .Auth .authHeader .authCard h1 {
+    font-size: 1.6rem;
+  }
+
+  .Auth .authHeader .authCard form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

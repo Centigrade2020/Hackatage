@@ -24,3 +24,13 @@
   text-decoration: none;
   font-weight: 500;
 }
+
+@media screen and (max-width: 400px) {
+  .Navbar .logo h1 {
+    font-size: 1rem;
+  }
+
+  .Navbar ul a {
+    font-size: 0.9rem;
+  }
+}
