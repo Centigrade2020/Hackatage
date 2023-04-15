@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view,parser_classes
 from rest_framework.parsers import JSONParser
 from django.contrib.auth.hashers import make_password,check_password
-from .models import get_auth,add_user,get_user,authenticate,chk_auth,logout_user
+from .models import get_auth,add_user,get_user,authenticate,chk_auth,logout_user,add_data
 from bson import json_util
 import json
 import openai
@@ -238,7 +238,8 @@ def ask_ai(request):
         )
         
     reply = chat.choices[0].message.content
-    print(json.dumps(reply))
+    # add_data(reply)
+    print(reply)
     return Response(reply.strip())
 
 @api_view(["POST"])

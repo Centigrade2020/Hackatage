@@ -42,3 +42,7 @@ def chk_auth(userId):
 def logout_user(userId):
     coll = dbname['users']
     coll.update_one({"_id":userId},{"$set":{"is_authenticated":False}})
+
+def add_data(data):
+    coll=dbname['user_trips']
+    coll.insert_many(data)
