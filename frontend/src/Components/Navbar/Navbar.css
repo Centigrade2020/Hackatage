@@ -5,7 +5,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 5%;
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 999;
 }
 
 .Navbar ul {

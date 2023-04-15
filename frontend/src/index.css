@@ -3,7 +3,9 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --primary: #0f43f0;
+  --blue: #29365d;
+  --darkBlue: #1d2745;
+  --darkGray: rgb(188, 188, 188);
   --secondary: #f0bc0f;
 
   --navbarHeight: 10vh;
