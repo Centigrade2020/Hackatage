@@ -9,6 +9,7 @@ django-cors-headers = "*"
 pymongo = "*"
 django-environ = "*"
 djangorestframework = "*"
+openai = "*"
 
 [dev-packages]
 
