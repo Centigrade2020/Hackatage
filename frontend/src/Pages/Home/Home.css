@@ -233,6 +233,24 @@
   /* padding: 40px; */
   display: grid;
   grid-template-rows: 10vh 70vh;
+  position: relative;
+}
+
+.TripPlanner .tpDisplay .loadingScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.TripPlanner .tpDisplay .loadingScreen p span {
+  font-weight: 600;
+  color: var(--blue);
 }
 
 .TripPlanner .tpDisplay > h1 {
@@ -421,5 +439,32 @@
   .packagesDisplay .package .content h2 {
     font-size: 1rem;
     font-weight: 500;
+  }
+
+  .TripPlanner .tpDisplay .loadingScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10%;
+  }
+
+  .TripPlanner .tpDisplay .loadingScreen h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .TripPlanner .tpDisplay .loadingScreen p {
+    text-align: center;
+  }
+
+  .TripPlanner .tpDisplay .loadingScreen p span {
+    font-weight: 600;
+    color: var(--blue);
   }
 }

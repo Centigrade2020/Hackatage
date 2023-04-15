@@ -427,11 +427,34 @@ function Home() {
   };
 
   const TripPlanner = () => {
+    const [countdown, setCountdown] = useState(40);
+
+    useEffect(() => {
+      countdown > 0
+        ? setTimeout(() => setCountdown(countdown - 1), 1000)
+        : setCountdown(15);
+    }, [countdown]);
+
     return (
       <div className="TripPlanner">
         <div className="tpDisplay">
           {loading ? (
-            <div>Loading...</div>
+            <div className="loadingScreen">
+              <h1>We are planning a trip for you!</h1>
+              <lottie-player
+                src="https://assets10.lottiefiles.com/packages/lf20_7fwvvesa.json"
+                background="transparent"
+                speed="0.5"
+                style={{ width: "200px", height: "200px" }}
+                loop
+                // controls
+
+                autoplay
+              ></lottie-player>
+              <p>
+                Please wait, Estimated countdown <span>{countdown}</span>
+              </p>
+            </div>
           ) : (
             <>
               <h1>
@@ -450,8 +473,7 @@ function Home() {
                   <div
                     className="package"
                     onClick={() => {
-                    window.open("/searchTickets", "_blank");
-
+                      window.open("/searchTickets", "_blank");
                     }}
                   >
                     <div className="img">
@@ -626,7 +648,7 @@ function Home() {
 
               <button
                 onClick={() => {
-                  handleClick();
+                  // handleClick();
                   setOpenTP(true);
                 }}
               >
