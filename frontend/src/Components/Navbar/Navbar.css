@@ -15,6 +15,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
   list-style: none;
+}
+
+.Navbar ul a {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
 }

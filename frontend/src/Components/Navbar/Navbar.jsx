@@ -6,7 +6,7 @@ import "./Navbar.css";
 function Navbar() {
   const navigate = useNavigate();
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const [name, setName] = useState("Username");
 
@@ -53,14 +53,15 @@ function Navbar() {
         </ul>
       ) : (
         <ul className="navLinks">
-          {pages.map((page, key) => {
-            if (page.show)
-              return (
-                <li key={key}>
-                  <NavLink name={page.name} path={page.path} index={key} />
-                </li>
-              );
-          })}
+          <ul>
+            <li>
+              <span className="material-symbols-outlined">home</span>
+              <NavLink name={"Home"} path={"/"} />
+            </li>
+            <li>
+              <NavLink name={"Login/Signup"} path={"/auth"} />
+            </li>
+          </ul>
         </ul>
       )}
     </nav>

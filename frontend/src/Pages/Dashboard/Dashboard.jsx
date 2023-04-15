@@ -393,7 +393,7 @@ function Dashboard() {
 
   const Booking = ({ obj }) => {
     console.log(obj);
-    const [showPlan, setShowPlan] = useState(true);
+    const [showPlan, setShowPlan] = useState(false);
     return (
       <div className="Booking">
         <div className="bheader">
