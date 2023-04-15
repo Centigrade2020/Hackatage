@@ -12,6 +12,6 @@ export const pages = [
   {
     name: "Dashboard",
     path: "/dashboard",
-    show: true,
+    show: false,
   },
 ];

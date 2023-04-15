@@ -5,6 +5,8 @@
 
   --primary: #0f43f0;
   --secondary: #f0bc0f;
+
+  --navbarHeight: 10vh;
 }
 
 * {

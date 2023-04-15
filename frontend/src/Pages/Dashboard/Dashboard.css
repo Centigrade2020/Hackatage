@@ -1,0 +1,12 @@
+.Dashboard {
+  width: 100%;
+  height: calc(100vh - var(--navbarHeight));
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+.Dashboard .left {
+  width: 100%;
+  height: inherit;
+  background-color: bisque;
+}

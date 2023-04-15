@@ -10,36 +10,45 @@ function Auth() {
         <>
           <form>
             <input placeholder="Email" name="email"></input>
-            <input placeholder="Username" name="username"></input>
-            <input placeholder="Phone" name="phone"></input>
+            <input placeholder="First Name" name="fname"></input>
+            <input placeholder="Last Name" name="lname"></input>
             <input placeholder="Password" name="password"></input>
-            <button type="submit">Submit</button>
+            <input placeholder="Confirm password" name="cpassword"></input>
+            <button type="submit">Login</button>
           </form>
-          <button
-            onClick={() => {
-              setNewUser(false);
-            }}
-          >
-            signup
-          </button>
+
+          <p>
+            Already signed up?{" "}
+            <a
+              onClick={() => {
+                setNewUser(false);
+              }}
+            >
+              Login
+            </a>
+          </p>
         </>
       ) : (
         <>
           <form>
             <input placeholder="Email" name="email"></input>
-
             <input placeholder="Password" name="password"></input>
-            <button type="submit">Submit</button>
+            <button type="submit">Sign up</button>
           </form>
-          <button
-            onClick={() => {
-              setNewUser(true);
-            }}
-          >
-            Login
-          </button>
+
+          <p>
+            Not signed up?{" "}
+            <a
+              onClick={() => {
+                setNewUser(true);
+              }}
+            >
+              Signup
+            </a>
+          </p>
         </>
       )}
+      <button>Login with Google</button>
     </div>
   );
 }
