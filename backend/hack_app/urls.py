@@ -6,4 +6,5 @@ urlpatterns=[
     path("test",views.get_db,name='test'),
     path("create_user",views.create_user,name='cus'),
     path("login_user",views.login_user,name='lus'),
+    path("ask",views.ask_ai,name='ask'),
 ]

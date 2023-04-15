@@ -6,6 +6,13 @@ from django.contrib.auth.hashers import make_password,check_password
 from .models import get_auth,add_user,get_user,authenticate,chk_auth,logout_user
 from bson import json_util
 import json
+import openai
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
+openai.api_key=env("OPENAI_KEY")
 
 def home(request):
     return render(request,"index.html",{})
@@ -72,3 +79,34 @@ def login_user(request):
 def logout(request):
     data = request.data
     logout_user(data['email'])
+
+@api_view(["POST"])
+@parser_classes([JSONParser])
+def ask_ai(request):
+    print("hi")
+    data = request.data
+    req_json={
+    '_id':'',
+    'Plan':[
+        {
+        'day':1,
+        'activities':
+            {
+            'time':'',
+            'description':'',
+            'budget':'Rs '
+            }
+        },
+    ],
+    'Total_Budget':'Rs '
+    }
+    message = "Generate itinerary for"+str(data['days'])+ "days in"+data['city']+"with budget "+str(data['budget'])+" in json format of example {'_id':'','Plan':[{'day':1,'activities':{'time':'','description':'','budget':'Rs '}},],'Total_Budget':'Rs '}"
+    
+    if message:
+        chat = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo", messages= [ {"role": "system", "content": message} ]
+        )
+        
+    reply = chat.choices[0].message.content
+    print(reply)
+    return Response(reply)
