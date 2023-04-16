@@ -418,6 +418,7 @@ function Home() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // "Access-Control-Allow-Origin": "http://localhost:8000/",
       },
       body: JSON.stringify({
         days: peopleCount,
@@ -484,6 +485,7 @@ function Home() {
                     onClick={() => {
                       window.open("/searchTickets", "_blank");
                     }}
+                    key={k}
                   >
                     <div className="img">
                       <img src={dubai} alt="dubai" />
@@ -531,6 +533,7 @@ function Home() {
                   onClick={() => {
                     window.open("/searchTickets", "_blank");
                   }}
+                  key={k}
                 >
                   <div className="img">
                     <img src={dubai} alt="dubai" />

@@ -61,6 +61,7 @@ function Auth() {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         localStorage.setItem("userId", res.message._id["$oid"]);
         localStorage.setItem("isAuthenticated", res.message.is_authenticated);
         localStorage.setItem("user", JSON.stringify(res.message));
@@ -104,7 +105,7 @@ function Auth() {
                     <p>First name</p>{" "}
                     <input
                       type="text"
-                      value={lname}
+                      value={fname}
                       onChange={(e) => setLname(e.target.value)}
                       placeholder="First name"
                       name="fname"
@@ -114,7 +115,7 @@ function Auth() {
                     <p>Last name</p>{" "}
                     <input
                       type="text"
-                      value={fname}
+                      value={lname}
                       onChange={(e) => setFname(e.target.value)}
                       placeholder="Last name"
                       name="lname"
