@@ -268,37 +268,6 @@
   font-size: 1rem;
 }
 
-.ShareView {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 999999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ShareView .svDisplay {
-  width: 40%;
-  height: 50vh;
-  background-color: white;
-  /* padding: 40px; */
-  display: grid;
-  grid-template-rows: 10vh 70vh;
-  position: relative;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-}
-
-.TripPlanner .svDisplay > h1 {
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 /* ---------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------- */

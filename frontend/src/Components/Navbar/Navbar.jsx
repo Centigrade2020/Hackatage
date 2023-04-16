@@ -17,7 +17,7 @@ function Navbar() {
     } else {
       setLoggedIn(false);
     }
-  }, [localStorage]);
+  }, [localStorage.getItem("user")]);
 
   const [active, setActive] = useState(0);
 
@@ -75,13 +75,10 @@ function Navbar() {
                 .then((res) => {
                   localStorage.clear();
                   navigate("/auth");
-                  window.location.reload();
                 });
             }}
           >
-            <span class="material-symbols-outlined" title="logout">
-              logout
-            </span>
+            <span class="material-symbols-outlined">logout</span>
           </li>
         </ul>
       ) : (

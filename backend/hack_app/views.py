@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view,parser_classes
 from rest_framework.parsers import JSONParser
 from django.contrib.auth.hashers import make_password,check_password
-from .models import get_auth,add_user,get_user,authenticate,chk_auth,logout_user,u_user,add_data
+from .models import get_auth,add_user,get_user,authenticate,get_book_data,logout_user,u_user,add_data,booking
 from bson import json_util
 import json
 import openai
@@ -116,7 +116,7 @@ def ask_ai(request):
     print("hi")
     data = request.data
     # message = "Generate list of jsons of 3 itineraries for"+str(data['days'])+ "days in"+data['city']+"with budget "+str(data['budget'])+" in json format of example {'_id':,'plan':[{'day':1,'activities':{'time':'','description':'','budget':'Rs '}},],'Total_Budget':'Rs ','key':"+data['days']+"_"+data['city']+"} only as list of json not any text"
-    message = "Generate list of jsons of 3 itineraries for"+str(data['days'])+ "days in"+data['city']+"within budget "+str(data['budget'])+""" in json format of example  [{_id:"643a9091a7e8be42cd8ac139",
+    message = "Generate 1 itinerary for"+str(data['days'])+ "days in"+data['city']+"within budget "+str(data['budget'])+""" in list of json format of example  [{_id:"643a9091a7e8be42cd8ac139",
       plan: [
         {
           day: 1,
@@ -180,88 +180,6 @@ def ask_ai(request):
       ],
       totalBudget:5000
       key: "3-dubai,ae",
-    },
-    {
-      _id: "643a8f77a7e8be42cd8ac137",
-      plan: [
-        {
-          day: 1,
-          activities: [
-            {
-              time: "9:00 AM",
-              description: "Arrive at Ngurah Rai International Airport",
-            },
-            {
-              time: "11:00 AM",
-              description: "Check-in to hotel",
-            },
-            {
-              time: "1:00 PM",
-              description: "Lunch at Warung Nasi Ayam Bu Oki",
-            },
-            {
-              time: "3:00 PM",
-              description: "Visit Tanah Lot Temple",
-            },
-            {
-              time: "6:00 PM",
-              description: "Dinner at La Lucciola",
-            },
-          ],
-        },
-        {
-          day: 2,
-          activities: [
-            {
-              time: "7:00 AM",
-              description: "Breakfast at hotel",
-            },
-            {
-              time: "9:00 AM",
-              description: "Visit Tegallalang Rice Terraces",
-            },
-            {
-              time: "12:00 PM",
-              description: "Lunch at Bebek Tepi Sawah Restaurant",
-            },
-            {
-              time: "3:00 PM",
-              description: "Visit Ubud Monkey Forest",
-            },
-            {
-              time: "6:00 PM",
-              description: "Dinner at Warung Enak",
-            },
-          ],
-        },
-        {
-          day: 3,
-          activities: [
-            {
-              time: "6:00 AM",
-              description: "Depart for Mount Batur sunrise trek",
-            },
-            {
-              time: "11:00 AM",
-              description: "Return from trek and have late breakfast",
-            },
-            {
-              time: "1:00 PM",
-              description: "Visit Tirta Empul Temple",
-            },
-            {
-              time: "4:00 PM",
-              description: "Relax at Kuta Beach",
-            },
-            {
-              time: "8:00 PM",
-              description: "Farewell dinner at Bambu Restaurant",
-            },
-          ],
-        },
-      ],
-      totalBudget:10000
-      key: "3-bali,id",
     }] """
     
     if message:
@@ -274,3 +192,24 @@ def ask_ai(request):
     # print(reply)
     return Response(reply.strip())
 
+@api_view(["POST"])
+@parser_classes([JSONParser])
+def book(request):
+    try:
+        data  =request.data
+        booking(data)
+        return Response({"message":"inserted successfully","status_code":201})
+    except Exception as e:
+        print("book ",e)
+        return Response({"message":"Some Error occured",'status_code':500})
+
+@api_view(["POST"])
+@parser_classes([JSONParser])
+def get_bookings(request):
+    try:
+        data = request.data
+        user = get_book_data(data)
+        return Response(user)
+    except Exception as e:
+        print("get booking",e)
+        return Response({"message":"Some Error occured",'status_code':500})

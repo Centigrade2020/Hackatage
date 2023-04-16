@@ -25,10 +25,6 @@
   text-decoration: none;
   font-weight: 500;
 }
-.Navbar ul li span {
-  align-self: flex-end;
-  cursor: pointer;
-}
 
 @media screen and (max-width: 600px) {
   .Navbar .logo h1 {

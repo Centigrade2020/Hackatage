@@ -21,7 +21,7 @@ function TripPlannerPage(props) {
 
   const options1 = {
     method: "GET",
-    // url: "https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation",
+    url: "https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation",
     params: { cityName: city, countryName: country },
     headers: {
       "X-RapidAPI-Key": "ce1ae727ccmshd78f2330d2840b5p1e148cjsn4d64fcc67e18",
@@ -71,7 +71,8 @@ function TripPlannerPage(props) {
       const data = obj;
       data["flight"] = selectedFlight;
       data["hotel"] = hotel;
-
+      data["email"] = JSON.parse(localStorage.getItem("user"))["email"];
+      console.log("hi");
       // axios.post(f)
       fetch("http://localhost:8000/book", {
         method: "POST",
