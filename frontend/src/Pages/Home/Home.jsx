@@ -9,6 +9,10 @@ import dubai from "../../Assets/dubai.jpg";
 function Home() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    if (!isAuthenticated) navigate("/");
+  }, []);
   // let permission = Notification.requestPermission();
   // const notification =new Notification("4:00");
 
@@ -414,8 +418,14 @@ function Home() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // "Access-Control-Allow-Origin": "http://localhost:8000/",
       },
-      body: JSON.stringify({ days: peopleCount, city, budget }),
+      body: JSON.stringify({
+        days: peopleCount,
+        city,
+        budget,
+        email: JSON.parse(localStorage.getItem("user"))["email"],
+      }),
     })
       .then((res) => res.json())
       .then((res) => {
@@ -478,6 +488,7 @@ function Home() {
                       navigate("/searchTickets", { state: { data:i._id} });
 
                     }}
+                    key={k}
                   >
                     <div className="img">
                       <img src={dubai} alt="dubai" />
@@ -527,6 +538,7 @@ function Home() {
                     navigate("/searchTickets",{ state: { data:i} });
 
                   }}
+                  key={k}
                 >
                   <div className="img">
                     <img src={dubai} alt="dubai" />

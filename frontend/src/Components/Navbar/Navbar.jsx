@@ -3,13 +3,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { pages } from "../../data";
 import "./Navbar.css";
 
-
 function Navbar() {
   const navigate = useNavigate();
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const [name, setName] = useState("Username");
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setName(JSON.parse(localStorage.getItem("user"))["fname"]);
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [localStorage]);
 
   const [active, setActive] = useState(0);
 
@@ -49,14 +57,34 @@ function Navbar() {
             <NavLink name={"Home"} path={"/"} />
           </li>
           <li>
-            <NavLink name={JSON.parse(localStorage.getItem("user"))["fname"]+" "+JSON.parse(localStorage.getItem("user"))["lname"]} path={"/dashboard"} />
+            <NavLink name={name} path={"/dashboard"} />
+          </li>
+          <li
+            onClick={() => {
+              console.log("hi");
+              fetch("http://localhost:8000/logout", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: JSON.parse(localStorage.getItem("user"))["email"],
+                }),
+              })
+                .then((res) => res.json())
+                .then((res) => {
+                  localStorage.clear();
+                  navigate("/auth");
+                });
+            }}
+          >
+            <span class="material-symbols-outlined">logout</span>
           </li>
         </ul>
       ) : (
         <ul className="navLinks">
           <ul>
             <li>
-              <span className="material-symbols-outlined">home</span>
               <NavLink name={"Home"} path={"/"} />
             </li>
             <li>

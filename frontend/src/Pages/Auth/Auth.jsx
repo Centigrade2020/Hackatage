@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import authbg from "../../Assets/authbg.jpg";
 
 import "./Auth.css";
-
 
 function Auth() {
   const [newUser, setNewUser] = useState(false);
@@ -14,6 +13,12 @@ function Auth() {
   const [fname, setFname] = useState("");
   const [passwd, setPasswd] = useState("");
   const [cnfPass, setCnfPass] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    if (isAuthenticated) navigate("/");
+  }, []);
   // const credentialResponse = {
   //   client_id:
   //     "983222062492-hg2nks96hdo66l7roqsgtltglblv0138.apps.googleusercontent.com",
@@ -21,7 +26,6 @@ function Auth() {
   //   select_by: "btn",
   //   // redirect_uris: ["http://localhost:3000/auth/google/callback"],
   // };
-  const navigate = useNavigate()
 
   const handleRegister = () => {
     const content = {
@@ -57,6 +61,7 @@ function Auth() {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         localStorage.setItem("userId", res.message._id["$oid"]);
         localStorage.setItem("isAuthenticated", res.message.is_authenticated);
         localStorage.setItem("user", JSON.stringify(res.message));
@@ -99,7 +104,7 @@ function Auth() {
                     <p>First name</p>{" "}
                     <input
                       type="text"
-                      value={lname}
+                      value={fname}
                       onChange={(e) => setLname(e.target.value)}
                       placeholder="First name"
                       name="fname"
@@ -109,7 +114,7 @@ function Auth() {
                     <p>Last name</p>{" "}
                     <input
                       type="text"
-                      value={fname}
+                      value={lname}
                       onChange={(e) => setFname(e.target.value)}
                       placeholder="Last name"
                       name="lname"

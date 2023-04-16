@@ -48,7 +48,7 @@ def getUser(request):
     try:
         data =request.data
         user = get_user(data['email'])
-        return Response({"message":json.loads(json_util.dumps(user))})
+        return Response({"message":json.loads(json_util.dumps(user)),"status_code":200})
     except Exception as e:
         print("get user",e)
         return Response({"message":"Some error Occurred"})
@@ -61,23 +61,22 @@ def update_user(request):
         print(data['email'])
         u_user(data['email'],data['phone'],data['day'],data['month'],data['year'],data['city'],data['state'],data['country'])
         user = get_user(data['email'])
-        return Response({"message":json.loads(json_util.dumps(user))})
+        return Response({"message":json.loads(json_util.dumps(user)),"status_code":201})
     except Exception as e:
         print("update user ",e)
-        return Response({"message":"Some error Occurred"})
+        return Response({"message":"Some error Occurred","status_code":500})
 
 
 def login(email,password):
     try :
         user = get_user(email)
-        for i in user:
-            if i:
-                passwd = i['password']
-                if check_password(password,passwd):
-                    u = authenticate(i["_id"]) 
-                    return u
-                else:
-                    return False
+        
+        passwd = user['password']
+        if check_password(password,passwd):
+            u = authenticate(user["_id"]) 
+            return u
+        else:
+            return False
     except Exception as e:
         print("login ",e)
         return False
@@ -94,16 +93,22 @@ def login_user(request):
                 print(json.loads(json_util.dumps(chk)))
                 return Response({'message':json.loads(json_util.dumps(chk)),"status_code":200,"is_authenticated":chk['is_authenticated']})
             else:
-                return Response({"message":"wrong Password"})
+                return Response({"message":"wrong Password","status_code":403})
     except Exception as e:
         print("login error: ",e)
-        return Response({"message":"Some error occured"})
+        return Response({"message":"Some error occured","status_code":500})
 
 @api_view(["POST"])
 @parser_classes([JSONParser])
 def logout(request):
-    data = request.data
-    logout_user(data['id'])
+    try:
+        data = request.data
+        logout_user(data['email'])
+        return Response({"message":"success"})
+    except Exception as e:
+        print("logout ",e)
+        return Response({"Error":"Something went wrong","status_code":500})
+
 
 @api_view(["POST"])
 @parser_classes([JSONParser])
@@ -111,7 +116,7 @@ def ask_ai(request):
     print("hi")
     data = request.data
     # message = "Generate list of jsons of 3 itineraries for"+str(data['days'])+ "days in"+data['city']+"with budget "+str(data['budget'])+" in json format of example {'_id':,'plan':[{'day':1,'activities':{'time':'','description':'','budget':'Rs '}},],'Total_Budget':'Rs ','key':"+data['days']+"_"+data['city']+"} only as list of json not any text"
-    message = "Generate list of jsons of 3 itineraries for"+str(data['days'])+ "days in"+data['city']+"with budget "+str(data['budget'])+""" in json format of example  [{_id:"643a9091a7e8be42cd8ac139",
+    message = "Generate list of jsons of 3 itineraries for"+str(data['days'])+ "days in"+data['city']+"within budget "+str(data['budget'])+""" in json format of example  [{_id:"643a9091a7e8be42cd8ac139",
       plan: [
         {
           day: 1,
@@ -173,6 +178,7 @@ def ask_ai(request):
           ],
         },
       ],
+      totalBudget:5000
       key: "3-dubai,ae",
     },
     {
@@ -254,6 +260,7 @@ def ask_ai(request):
           ],
         },
       ],
+      totalBudget:10000
       key: "3-bali,id",
     }] """
     
@@ -263,13 +270,7 @@ def ask_ai(request):
         )
         
     reply = chat.choices[0].message.content
-    # add_data(reply)
-    print(reply)
+    add_data(reply,data['email'])
+    # print(reply)
     return Response(reply.strip())
 
-@api_view(["POST"])
-@parser_classes([JSONParser])
-def flight(request):
-    print("hello")
-    data = request.data
-    # message = 
