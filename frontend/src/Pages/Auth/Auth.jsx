@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import authbg from "../../Assets/authbg.jpg";
+import authbg from "../../Assets/authbg.webp";
 
 import "./Auth.css";
 

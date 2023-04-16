@@ -25,6 +25,9 @@
   text-decoration: none;
   font-weight: 500;
 }
+.Navbar ul span {
+  cursor: pointer;
+}
 
 @media screen and (max-width: 600px) {
   .Navbar .logo h1 {
