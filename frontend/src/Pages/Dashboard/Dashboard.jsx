@@ -534,6 +534,7 @@ function Dashboard() {
               </div>
             ))}
         </div>
+        <div className="bfooter"></div>
       </div>
     );
   };
