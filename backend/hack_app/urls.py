@@ -11,5 +11,8 @@ urlpatterns=[
     path("logout",views.logout,name='l'),
     path("ask",views.ask_ai,name='ask'),
     path("book",views.book,name='bk'),
+<<<<<<< HEAD
     path("get_book",views.get_bookings,name='bk'),
+=======
+>>>>>>> refs/remotes/origin/main
 ]
