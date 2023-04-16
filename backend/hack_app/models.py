@@ -42,9 +42,9 @@ def chk_auth(userId):
     user = coll.find_one({"_id":userId})
     return user['is_authenticated']
 
-def logout_user(userId):
-    coll = dbname['users']
-    coll.update_one({"_id":userId},{"$set":{"is_authenticated":False}})
+def logout_user(email):
+    coll = dbname['email']
+    coll.update_one({"email":email},{"$set":{"is_authenticated":False}})
 
 def add_data(data,email ):
     coll=dbname['user_trips']
