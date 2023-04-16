@@ -75,10 +75,13 @@ function Navbar() {
                 .then((res) => {
                   localStorage.clear();
                   navigate("/auth");
+                  window.location.reload();
                 });
             }}
           >
-            <span class="material-symbols-outlined">logout</span>
+            <span class="material-symbols-outlined" title="logout">
+              logout
+            </span>
           </li>
         </ul>
       ) : (
