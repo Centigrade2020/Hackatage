@@ -61,7 +61,21 @@ function Navbar() {
           </li>
           <li
             onClick={() => {
-              // Logout()
+              console.log("hi");
+              fetch("http://localhost:8000/logout", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: JSON.parse(localStorage.getItem("user"))["email"],
+                }),
+              })
+                .then((res) => res.json())
+                .then((res) => {
+                  localStorage.clear();
+                  navigate("/auth");
+                });
             }}
           >
             <span class="material-symbols-outlined">logout</span>
