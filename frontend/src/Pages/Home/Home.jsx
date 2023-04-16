@@ -432,10 +432,7 @@ function Home() {
         setLoading(false);
         setData(JSON.parse(res));
         console.log(JSON.parse(res));
-        new Notification("Your requested data is ready !");
-        // setData(JSON.parse(res));
-        console.log(JSON.parse(res));
-        // console.log(data);
+        console.log(data);
       });
   };
 
@@ -451,63 +448,60 @@ function Home() {
     return (
       <div className="TripPlanner">
         <div className="tpDisplay">
-          {
-            loading && (
-              <div className="loadingScreen">
-                <h1>We are planning a trip for you!</h1>
-                <lottie-player
-                  src="https://assets10.lottiefiles.com/packages/lf20_7fwvvesa.json"
-                  background="transparent"
-                  speed="0.5"
-                  style={{ width: "200px", height: "200px" }}
-                  loop
-                  // controls
+          {loading ? (
+            <div className="loadingScreen">
+              <h1>We are planning a trip for you!</h1>
+              <lottie-player
+                src="https://assets10.lottiefiles.com/packages/lf20_7fwvvesa.json"
+                background="transparent"
+                speed="0.5"
+                style={{ width: "200px", height: "200px" }}
+                loop
+                // controls
 
-                  autoplay
-                ></lottie-player>
-                <p>
-                  Please wait, Estimated countdown <span>{countdown}</span>
-                </p>
+                autoplay
+              ></lottie-player>
+              <p>
+                Please wait, Estimated countdown <span>{countdown}</span>
+              </p>
+            </div>
+          ) : (
+            <>
+              <h1>
+                Trips we found for you{" "}
+                <span
+                  class="material-symbols-outlined bigIcon"
+                  onClick={() => {
+                    setOpenTP(false);
+                  }}
+                >
+                  close
+                </span>
+              </h1>
+              <div className="packagesDisplayTP">
+                {data.map((i, k) => (
+                  <div
+                    className="package"
+                    onClick={() => {
+                      // {<Navigate to="/searchTickets" replace="true"></Navigate>}
+                      // window.open("/searchTickets", "_blank");
+                      navigate("/searchTickets", { state: { data:i._id} });
+
+                    }}
+                    key={k}
+                  >
+                    <div className="img">
+                      <img src={dubai} alt="dubai" />
+                      <p className="pdDays">{i.plan.length} Days</p>
+                    </div>
+                    <div className="content">
+                      <h2>{i.key}</h2>
+                    </div>
+                  </div>
+                ))}
               </div>
-            )
-            //: (
-            //   <>
-            //     <h1>
-            //       Trips we found for you{" "}
-            //       <span
-            //         class="material-symbols-outlined bigIcon"
-            //         onClick={() => {
-            //           setOpenTP(false);
-            //         }}
-            //       >
-            //         close
-            //       </span>
-            //     </h1>
-            //     <div className="packagesDisplayTP">
-            //       {data.map((i, k) => (
-            //         <div
-            //           className="package"
-            //           onClick={() => {
-            //             // {<Navigate to="/searchTickets" replace="true"></Navigate>}
-            //             // window.open("/searchTickets", "_blank");
-            //             navigate("/searchTickets", { state: { data:i._id} });
-
-            //           }}
-            //           key={k}
-            //         >
-            //           <div className="img">
-            //             <img src={dubai} alt="dubai" />
-            //             <p className="pdDays">{i.plan.length} Days</p>
-            //           </div>
-            //           <div className="content">
-            //             <h2>{i.key}</h2>
-            //           </div>
-            //         </div>
-            //       ))}
-            //     </div>
-            //   </>
-            // )
-          }
+            </>
+          )}
         </div>
       </div>
     );
@@ -541,7 +535,8 @@ function Home() {
                   className="package"
                   onClick={() => {
                     // window.open("/searchTickets", "_blank");
-                    navigate("/searchTickets", { state: { data: i } });
+                    navigate("/searchTickets",{ state: { data:i} });
+
                   }}
                   key={k}
                 >
