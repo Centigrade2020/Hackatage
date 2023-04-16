@@ -3,8 +3,8 @@ import { useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
 
-import vacation1 from "../../Assets/vacation1.jpg";
-import dubai from "../../Assets/dubai.jpg";
+import vacation1 from "../../Assets/vacation1.webp";
+import dubai from "../../Assets/dubai.webp";
 
 function Home() {
   const navigate = useNavigate();

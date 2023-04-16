@@ -182,6 +182,8 @@ function Dashboard() {
     const [state, setState] = useState("");
     const [country, setCountry] = useState("");
 
+    useEffect(() => {}, {});
+
     useEffect(() => {
       fetch("http://localhost:8000/get_user", {
         method: "POST",
