@@ -70,14 +70,13 @@ def update_user(request):
 def login(email,password):
     try :
         user = get_user(email)
-        for i in user:
-            if i:
-                passwd = i['password']
-                if check_password(password,passwd):
-                    u = authenticate(i["_id"]) 
-                    return u
-                else:
-                    return False
+        
+        passwd = user['password']
+        if check_password(password,passwd):
+            u = authenticate(user["_id"]) 
+            return u
+        else:
+            return False
     except Exception as e:
         print("login ",e)
         return False
@@ -263,8 +262,8 @@ def ask_ai(request):
         )
         
     reply = chat.choices[0].message.content
-    # add_data(reply)
-    print(reply)
+    add_data(reply,data['email'])
+    # print(reply)
     return Response(reply.strip())
 
 @api_view(["POST"])
