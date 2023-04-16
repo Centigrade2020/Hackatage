@@ -17,8 +17,12 @@ function Auth() {
 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem("isAuthenticated");
-    if (isAuthenticated) navigate("/");
+    if (isAuthenticated) {
+      navigate("/");
+      window.location.reload();
+    }
   }, []);
+  Notification.requestPermission();
   // const credentialResponse = {
   //   client_id:
   //     "983222062492-hg2nks96hdo66l7roqsgtltglblv0138.apps.googleusercontent.com",
@@ -43,7 +47,17 @@ function Auth() {
       body: JSON.stringify(content),
     })
       .then((res) => res.json())
-      .then((res) => console.log(res));
+      .then((res) => {
+        console.log(res);
+        if (res.status_code === 403) {
+          window.alert(res.message);
+        } else if (res.status_code === 500) {
+          window.alert(res.message);
+        } else {
+          new Notification("User created successfully!");
+          setNewUser(false);
+        }
+      });
   };
 
   const handleLogin = () => {
@@ -62,12 +76,18 @@ function Auth() {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        localStorage.setItem("userId", res.message._id["$oid"]);
-        localStorage.setItem("isAuthenticated", res.message.is_authenticated);
-        localStorage.setItem("user", JSON.stringify(res.message));
-        console.log(res.message);
-        console.log(JSON.parse(localStorage.getItem("user")));
-        navigate("/");
+        if (res.status_code === 403) {
+          window.alert(res.message);
+        } else if (res.status_code === 500) {
+          window.alert(res.message);
+        } else {
+          localStorage.setItem("userId", res.message._id["$oid"]);
+          localStorage.setItem("isAuthenticated", res.message.is_authenticated);
+          localStorage.setItem("user", JSON.stringify(res.message));
+          console.log(res.message);
+          console.log(JSON.parse(localStorage.getItem("user")));
+          navigate("/");
+        }
       });
   };
   // client_id=304531247476-58f940f3b0dgrupg95cdo8b51fspupdv.apps.googleusercontent.com
@@ -105,7 +125,7 @@ function Auth() {
                     <input
                       type="text"
                       value={fname}
-                      onChange={(e) => setLname(e.target.value)}
+                      onChange={(e) => setFname(e.target.value)}
                       placeholder="First name"
                       name="fname"
                     />
@@ -115,7 +135,7 @@ function Auth() {
                     <input
                       type="text"
                       value={lname}
-                      onChange={(e) => setFname(e.target.value)}
+                      onChange={(e) => setLname(e.target.value)}
                       placeholder="Last name"
                       name="lname"
                     />
