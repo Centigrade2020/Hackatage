@@ -536,11 +536,7 @@ function Dashboard() {
                 </>
               )}
             </button>
-            <button
-              onClick={() => {
-                setOpenSV(true);
-              }}
-            >
+            <button>
               <span class="material-symbols-outlined">share</span> Share
             </button>
           </div>
@@ -570,52 +566,48 @@ function Dashboard() {
   const [tab, setTab] = useState("bookings");
 
   return (
-    <>
-      {openSV && <ShareView />}
-
-      <div className="Dashboard">
-        <div className="left">
-          <ul>
-            <li
-              onClick={() => {
-                setTab("bookings");
-              }}
-              className={tab == "bookings" ? "dtabActive" : "dtab"}
-            >
-              <span className="material-symbols-outlined">description</span>{" "}
-              Bookings{" "}
-              {tab == "bookings" && (
-                <span className="material-symbols-outlined sendRight">
-                  arrow_left
-                </span>
-              )}
-            </li>
-            <li
-              onClick={() => {
-                setTab("profile");
-              }}
-              className={tab == "profile" ? "dtabActive" : "dtab"}
-            >
-              <span className="material-symbols-outlined">person</span> Profile{" "}
-              {tab == "profile" && (
-                <span className="material-symbols-outlined sendRight">
-                  arrow_left
-                </span>
-              )}
-            </li>
-          </ul>
-        </div>
-        <div className="right">
-          {tab == "bookings" ? (
-            <TabBookings />
-          ) : tab == "profile" ? (
-            <TabProfile />
-          ) : (
-            <></>
-          )}
-        </div>
+    <div className="Dashboard">
+      <div className="left">
+        <ul>
+          <li
+            onClick={() => {
+              setTab("bookings");
+            }}
+            className={tab == "bookings" ? "dtabActive" : "dtab"}
+          >
+            <span className="material-symbols-outlined">description</span>{" "}
+            Bookings{" "}
+            {tab == "bookings" && (
+              <span className="material-symbols-outlined sendRight">
+                arrow_left
+              </span>
+            )}
+          </li>
+          <li
+            onClick={() => {
+              setTab("profile");
+            }}
+            className={tab == "profile" ? "dtabActive" : "dtab"}
+          >
+            <span className="material-symbols-outlined">person</span> Profile{" "}
+            {tab == "profile" && (
+              <span className="material-symbols-outlined sendRight">
+                arrow_left
+              </span>
+            )}
+          </li>
+        </ul>
       </div>
-    </>
+      <div className="right">
+        {tab == "bookings" ? (
+          <TabBookings />
+        ) : tab == "profile" ? (
+          <TabProfile />
+        ) : (
+          <></>
+        )}
+      </div>
+    </div>
   );
 }
 

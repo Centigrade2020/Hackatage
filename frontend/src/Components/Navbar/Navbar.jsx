@@ -77,7 +77,6 @@ function Navbar() {
                 .then((res) => {
                   localStorage.clear();
                   navigate("/auth");
-                  window.location.reload();
                 });
             }}
           >
