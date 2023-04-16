@@ -28,12 +28,14 @@ function Dashboard() {
                 <a href="mailto://centigrade@gmail.com">mail</a>
               </li>
               <li>
+                <span className="material-symbols-outlined">mail</span>
                 <a
                   href="whatsapp://send?text=This is WhatsApp sharing example using link"
                   data-action="share/whatsapp/share"
                   target="_blank"
-                  class="material-symbols-outlined"
+                  className="material-symbols-outlined"
                 >
+                  mail
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 50 50"
