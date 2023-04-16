@@ -248,20 +248,24 @@ function TripPlannerPage(props) {
           ))}
         </div>
         <div className="sdTabH">
-          <label>
-            <h3>Name</h3>
-            <p>{hotel.name}</p>
-          </label>
-          <label>
-            <h3>Rating</h3>
-            <p>{hotel.rating}</p>
-          </label>
-          <label>
-            <h3></h3>
-            <p>
-              <a href={hotel.link}>Click to book</a>
-            </p>
-          </label>
+          {hotel != undefined && (
+            <>
+              <label>
+                <h3>Name</h3>
+                <p>{hotel.name}</p>
+              </label>
+              <label>
+                <h3>Rating</h3>
+                <p>{hotel.rating}</p>
+              </label>
+              <label>
+                <h3></h3>
+                <p>
+                  <a href={hotel.link}>Click to book</a>
+                </p>
+              </label>
+            </>
+          )}
         </div>
       </div>
 
