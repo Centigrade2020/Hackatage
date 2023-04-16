@@ -59,6 +59,13 @@ function Navbar() {
           <li>
             <NavLink name={name} path={"/dashboard"} />
           </li>
+          <li
+            onClick={() => {
+              // Logout()
+            }}
+          >
+            <span class="material-symbols-outlined">logout</span>
+          </li>
         </ul>
       ) : (
         <ul className="navLinks">
