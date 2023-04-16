@@ -46,9 +46,10 @@ def logout_user(userId):
     coll = dbname['users']
     coll.update_one({"_id":userId},{"$set":{"is_authenticated":False}})
 
-def add_data(data):
+def add_data(data,email ):
     coll=dbname['user_trips']
-    coll.insert_many(data)
+    coll.insert_one({"data":data.strip(),"email":email})
+    print(data.strip())
 #         phone,
 #         day,
 #         month,
