@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view,parser_classes
 from rest_framework.parsers import JSONParser
 from django.contrib.auth.hashers import make_password,check_password
-from .models import get_auth,add_user,get_user,authenticate,chk_auth,logout_user,u_user,add_data
+from .models import get_auth,add_user,get_user,authenticate,chk_auth,logout_user,u_user,add_data,booking
 from bson import json_util
 import json
 import openai
@@ -274,3 +274,10 @@ def ask_ai(request):
     # print(reply)
     return Response(reply.strip())
 
+@api_view(["POST"])
+@parser_classes([JSONParser])
+def book(request):
+    data  =request.data
+    booking(data)
+    # print(data)
+    return Response({})

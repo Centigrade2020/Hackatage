@@ -58,6 +58,14 @@ def add_data(data,email ):
 #         state,
 #         country
 
+def booking(data):
+    print(data['_id'])
+    print(data['plan'])
+    print(data['flight'])
+    print(data['hotel'])
+    print(data['email'])
+
+
 def u_user(userId,phone,day,month,year,city,state,country):
     coll = dbname['users']
     coll.update_one({"email":userId},{"$set":{"phone":phone,"day":day,"month":month,"year":year,"city":city,"state":state,"country":country}})

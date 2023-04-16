@@ -17,7 +17,7 @@ function Navbar() {
     } else {
       setLoggedIn(false);
     }
-  }, [localStorage]);
+  }, [localStorage.getItem("user")]);
 
   const [active, setActive] = useState(0);
 

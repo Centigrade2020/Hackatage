@@ -10,4 +10,5 @@ urlpatterns=[
     path("login_user",views.login_user,name='lus'),
     path("logout",views.logout,name='l'),
     path("ask",views.ask_ai,name='ask'),
+    path("book",views.book,name='bk'),
 ]
