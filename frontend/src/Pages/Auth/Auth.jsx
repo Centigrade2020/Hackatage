@@ -75,7 +75,7 @@ function Auth() {
   return (
     <div className="Auth">
       <div className="authHeader">
-        <img src={authbg} alt="authbg" />
+        <img src={authbg} loading="eager" alt="authbg" />
         <div className="overlay"></div>
         <div className="content">
           <h1>
