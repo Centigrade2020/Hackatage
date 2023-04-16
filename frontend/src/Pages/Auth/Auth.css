@@ -138,6 +138,7 @@
     height: 100%;
     width: auto;
     transform: translateY(0%);
+    transform: translateX(-30%);
   }
 
   .Auth .authHeader .content {

@@ -11,7 +11,6 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Pages.Home />} />
           <Route exact path="/auth" element={<Pages.Auth />} />
-          <Route exact path="/test" element={<Pages.Test />} />
           <Route exact path="/dashboard" element={<Pages.Dashboard />} />
           <Route
             exact
