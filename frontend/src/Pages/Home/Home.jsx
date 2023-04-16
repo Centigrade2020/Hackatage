@@ -9,6 +9,10 @@ import dubai from "../../Assets/dubai.jpg";
 function Home() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    if (!isAuthenticated) navigate("/");
+  }, []);
   // let permission = Notification.requestPermission();
   // const notification =new Notification("4:00");
 
