@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import React from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
@@ -8,14 +8,20 @@ import "./Auth.css";
 
 function Auth() {
   const [newUser, setNewUser] = useState(false);
-  const [email, setEmail] = useState("");
-  const [lname, setLname] = useState("");
-  const [fname, setFname] = useState("");
-  const [passwd, setPasswd] = useState("");
-  const [cnfPass, setCnfPass] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [lname, setLname] = useState("");
+  // const [fname, setFname] = useState("");
+  // const [passwd, setPasswd] = useState("");
+  // const [cnfPass, setCnfPass] = useState("");
+  const email = useRef();
+  const lname = useRef();
+  const fname = useRef();
+  const passwd = useRef();
+  const cnfPass = useRef();
   const navigate = useNavigate();
 
   useEffect(() => {
+    Notification.requestPermission();
     const isAuthenticated = localStorage.getItem("isAuthenticated");
     if (isAuthenticated) navigate("/");
   }, []);
@@ -29,10 +35,10 @@ function Auth() {
 
   const handleRegister = () => {
     const content = {
-      fname,
-      lname,
-      email,
-      passwd,
+      fname: fname.current?.value,
+      lname: lname.current?.value,
+      email: email.current?.value,
+      passwd: passwd.current?.value,
     };
 
     fetch("http://localhost:8000/create_user", {
@@ -48,8 +54,8 @@ function Auth() {
 
   const handleLogin = () => {
     const content = {
-      email,
-      passwd,
+      email: email.current?.value,
+      passwd: passwd.current?.value,
     };
 
     fetch("http://localhost:8000/login_user", {
@@ -93,7 +99,7 @@ function Auth() {
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  ref={email}
                   placeholder="Email"
                   name="email"
                 />
@@ -104,8 +110,7 @@ function Auth() {
                   <p>First name</p>{" "}
                   <input
                     type="text"
-                    value={fname}
-                    onChange={(e) => setLname(e.target.value)}
+                    ref={fname}
                     placeholder="First name"
                     name="fname"
                   />
@@ -114,8 +119,7 @@ function Auth() {
                   <p>Last name</p>{" "}
                   <input
                     type="text"
-                    value={lname}
-                    onChange={(e) => setFname(e.target.value)}
+                    ref={lname}
                     placeholder="Last name"
                     name="lname"
                   />
@@ -126,8 +130,7 @@ function Auth() {
                 <p>Password</p>{" "}
                 <input
                   type="password"
-                  value={passwd}
-                  onChange={(e) => setPasswd(e.target.value)}
+                  ref={passwd}
                   placeholder="Password"
                   name="password"
                 />
@@ -137,8 +140,7 @@ function Auth() {
                 <p>Confirm password</p>{" "}
                 <input
                   type="password"
-                  value={cnfPass}
-                  onChange={(e) => setCnfPass(e.target.value)}
+                  ref={cnfPass}
                   placeholder="Confirm password"
                   name="cpassword"
                 />
@@ -172,8 +174,7 @@ function Auth() {
                 <p>Enter your email</p>{" "}
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  ref={email}
                   placeholder="Email"
                   name="email"
                 />
@@ -182,8 +183,7 @@ function Auth() {
                 <p>Enter your password</p>{" "}
                 <input
                   type="password"
-                  value={passwd}
-                  onChange={(e) => setPasswd(e.target.value)}
+                  ref={passwd}
                   placeholder="Password"
                   name="password"
                 />

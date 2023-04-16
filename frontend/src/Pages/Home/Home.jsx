@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
@@ -407,8 +407,11 @@ function Home() {
     },
   ];
 
-  const [city, setCity] = useState("");
-  const [peopleCount, setPeopleCount] = useState("");
+  const city = useRef();
+  const peopleCount = useRef();
+
+  // const [city, setCity] = useState("");
+  // const [peopleCount, setPeopleCount] = useState("");
   const [budget, setBudget] = useState(10000);
   const [data, setData] = useState();
   const [openTP, setOpenTP] = useState(false);
@@ -422,9 +425,9 @@ function Home() {
         // "Access-Control-Allow-Origin": "http://localhost:8000/",
       },
       body: JSON.stringify({
-        days: peopleCount,
-        city,
-        budget,
+        days: peopleCount.current?.value,
+        city: city.current?.value,
+        budget: budget,
         email: JSON.parse(localStorage.getItem("user"))["email"],
       }),
     })
@@ -448,62 +451,22 @@ function Home() {
     return (
       <div className="TripPlanner">
         <div className="tpDisplay">
-          {
-            loading && (
-              <div className="loadingScreen">
-                <h1>We are planning a trip for you!</h1>
-                <lottie-player
-                  src="https://assets10.lottiefiles.com/packages/lf20_7fwvvesa.json"
-                  background="transparent"
-                  speed="0.5"
-                  style={{ width: "200px", height: "200px" }}
-                  loop
-                  // controls
-
-                  autoplay
-                ></lottie-player>
-                <p>
-                  Please wait, Estimated countdown <span>{countdown}</span>
-                </p>
-              </div>
-            )
-            // : (
-            //   <>
-            //     <h1>
-            //       Trips we found for you{" "}
-            //       <span
-            //         class="material-symbols-outlined bigIcon"
-            //         onClick={() => {
-            //           setOpenTP(false);
-            //         }}
-            //       >
-            //         close
-            //       </span>
-            //     </h1>
-            //     <div className="packagesDisplayTP">
-            //       {data.map((i, k) => (
-            //         <div
-            //           className="package"
-            //           onClick={() => {
-            //             // {<Navigate to="/searchTickets" replace="true"></Navigate>}
-            //             // window.open("/searchTickets", "_blank");
-            //             navigate("/searchTickets", { state: { data: i._id } });
-            //           }}
-            //           key={k}
-            //         >
-            //           <div className="img">
-            //             <img src={dubai} alt="dubai" />
-            //             <p className="pdDays">{i.plan.length} Days</p>
-            //           </div>
-            //           <div className="content">
-            //             <h2>{i.key}</h2>
-            //           </div>
-            //         </div>
-            //       ))}
-            //     </div>
-            //   </>
-            // )
-          }
+          {loading && (
+            <div className="loadingScreen">
+              <h1>We are planning a trip for you!</h1>
+              <lottie-player
+                src="https://assets10.lottiefiles.com/packages/lf20_7fwvvesa.json"
+                background="transparent"
+                speed="0.5"
+                style={{ width: "200px", height: "200px" }}
+                loop
+                autoplay
+              ></lottie-player>
+              <p>
+                Please wait, Estimated countdown <span>{countdown}</span>
+              </p>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -551,22 +514,6 @@ function Home() {
                 </div>
               ))}
             </div>
-            {/* {recommendedData.map((i, k) => (
-            <>
-              <h2>{i.key}</h2>
-              {i.plan.map((index, key) => (
-                <>
-                  <p>day: {index.day}</p>
-                  {index.activities.map((val, ki) => (
-                    <>
-                      <p>{val.time}</p>
-                      <p>{val.description}</p>
-                    </>
-                  ))}
-                </>
-              ))}
-            </>
-          ))} */}
           </div>
           <div className="right">
             <h1>Plan your Trip</h1>
@@ -581,7 +528,7 @@ function Home() {
                   type="text"
                   placeholder="City"
                   name="city"
-                  value={city}
+                  ref={city}
                   onChange={(e) => {
                     setCity(e.target.value);
                   }}
@@ -594,10 +541,10 @@ function Home() {
                   type="number"
                   placeholder="Count"
                   name="count"
-                  value={peopleCount}
-                  onChange={(e) => {
-                    setPeopleCount(e.target.value);
-                  }}
+                  ref={peopleCount}
+                  // onChange={(e) => {
+                  //   setPeopleCount(e.target.value);
+                  // }}
                 />
               </label>
 

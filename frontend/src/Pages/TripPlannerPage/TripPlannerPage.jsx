@@ -13,6 +13,7 @@ function TripPlannerPage(props) {
     link: "https://www.booking.com/hotel/in/rr-mount-elite-suites.de.html?aid=1938431",
     rating: 9,
   });
+  // const [hotel, setHotel] = useState(undefined);
   const [showFlight, setShowFlight] = useState(true);
   // const [showHotel, setShowHotel] = useState(true);
 
@@ -37,7 +38,7 @@ function TripPlannerPage(props) {
       .request(options1)
       .then(function (response) {
         console.log(response.data);
-        // setHotel(response.data);
+        setHotel(response.data);
       })
       .catch(function (error) {
         console.error(error);
@@ -76,7 +77,6 @@ function TripPlannerPage(props) {
       data["flight"] = selectedFlight;
       data["hotel"] = hotel;
       data["email"] = JSON.parse(localStorage.getItem("user"))["email"];
-      console.log("hi");
       // axios.post(f)
       fetch("http://localhost:8000/book", {
         method: "POST",
@@ -86,7 +86,7 @@ function TripPlannerPage(props) {
         body: JSON.stringify(data),
       })
         .then((res) => res.json())
-        .then((res) => console.log(res));
+        .then((res) => new Notification("Booked Plan Succesfully !"));
     }
   };
 
