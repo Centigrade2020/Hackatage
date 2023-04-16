@@ -208,8 +208,12 @@ def book(request):
 def get_bookings(request):
     try:
         data = request.data
-        user = get_book_data(data)
-        return Response(user)
+        user = get_book_data(data['email'])
+        li=[]
+        for i in user:
+            li.append(i)
+            
+        return Response({"message":li})
     except Exception as e:
         print("get booking",e)
         return Response({"message":"Some Error occured",'status_code':500})

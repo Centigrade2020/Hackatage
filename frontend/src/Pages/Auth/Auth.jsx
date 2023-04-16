@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import authbg from "../../Assets/authbg.webp";
+import authbg from "../../Assets/authbg.jpg";
 
 import "./Auth.css";
 
@@ -75,7 +75,7 @@ function Auth() {
   return (
     <div className="Auth">
       <div className="authHeader">
-        <img src={authbg} loading="eager" alt="authbg" />
+        <img src={authbg} alt="authbg" />
         <div className="overlay"></div>
         <div className="content">
           <h1>

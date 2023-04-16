@@ -65,11 +65,11 @@ def booking(data):
     # print(data['hotel'])
     # print(data['email'])
     coll = dbname['bookings']
-    coll.insert_one({"_id":data["_id"],"email":data['email'],"plan":data['plan'],"hotel":data['hotel']})
+    coll.insert_one({"_id":data["_id"],"email":data['email'],"plan":data['plan'],"flight":data['flight'],"hotel":data['hotel']})
 
 def get_book_data(email):
     coll = dbname['bookings']
-    user = coll.find_one({"email":email})
+    user = coll.find({"email":email})
     return user
 
 

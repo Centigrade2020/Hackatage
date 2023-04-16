@@ -3,16 +3,17 @@ import { useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
 
-import vacation1 from "../../Assets/vacation1.webp";
-import dubai from "../../Assets/dubai.webp";
+import vacation1 from "../../Assets/vacation1.jpg";
+import dubai from "../../Assets/dubai.jpg";
 
 function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem("isAuthenticated");
-    if (!isAuthenticated) navigate("/");
-  }, []);
+    if (!isAuthenticated) navigate("/auth");
+  }, [localStorage.getItem("isAuthenticated")]);
+
   // let permission = Notification.requestPermission();
   // const notification =new Notification("4:00");
 
@@ -429,10 +430,9 @@ function Home() {
     })
       .then((res) => res.json())
       .then((res) => {
-        setLoading(false);
-        setData(JSON.parse(res));
         console.log(JSON.parse(res));
-        console.log(data);
+        navigate("/searchTickets", { state: { data: JSON.parse(res)[0] } });
+        setLoading(false);
       });
   };
 
@@ -448,59 +448,62 @@ function Home() {
     return (
       <div className="TripPlanner">
         <div className="tpDisplay">
-          {loading ? (
-            <div className="loadingScreen">
-              <h1>We are planning a trip for you!</h1>
-              <lottie-player
-                src="https://assets10.lottiefiles.com/packages/lf20_7fwvvesa.json"
-                background="transparent"
-                speed="0.5"
-                style={{ width: "200px", height: "200px" }}
-                loop
-                // controls
+          {
+            loading && (
+              <div className="loadingScreen">
+                <h1>We are planning a trip for you!</h1>
+                <lottie-player
+                  src="https://assets10.lottiefiles.com/packages/lf20_7fwvvesa.json"
+                  background="transparent"
+                  speed="0.5"
+                  style={{ width: "200px", height: "200px" }}
+                  loop
+                  // controls
 
-                autoplay
-              ></lottie-player>
-              <p>
-                Please wait, Estimated countdown <span>{countdown}</span>
-              </p>
-            </div>
-          ) : (
-            <>
-              <h1>
-                Trips we found for you{" "}
-                <span
-                  class="material-symbols-outlined bigIcon"
-                  onClick={() => {
-                    setOpenTP(false);
-                  }}
-                >
-                  close
-                </span>
-              </h1>
-              <div className="packagesDisplayTP">
-                {data.map((i, k) => (
-                  <div
-                    className="package"
-                    onClick={() => {
-                      // {<Navigate to="/searchTickets" replace="true"></Navigate>}
-                      // window.open("/searchTickets", "_blank");
-                      navigate("/searchTickets", { state: { data: i._id } });
-                    }}
-                    key={k}
-                  >
-                    <div className="img">
-                      <img src={dubai} alt="dubai" />
-                      <p className="pdDays">{i.plan.length} Days</p>
-                    </div>
-                    <div className="content">
-                      <h2>{i.key}</h2>
-                    </div>
-                  </div>
-                ))}
+                  autoplay
+                ></lottie-player>
+                <p>
+                  Please wait, Estimated countdown <span>{countdown}</span>
+                </p>
               </div>
-            </>
-          )}
+            )
+            // : (
+            //   <>
+            //     <h1>
+            //       Trips we found for you{" "}
+            //       <span
+            //         class="material-symbols-outlined bigIcon"
+            //         onClick={() => {
+            //           setOpenTP(false);
+            //         }}
+            //       >
+            //         close
+            //       </span>
+            //     </h1>
+            //     <div className="packagesDisplayTP">
+            //       {data.map((i, k) => (
+            //         <div
+            //           className="package"
+            //           onClick={() => {
+            //             // {<Navigate to="/searchTickets" replace="true"></Navigate>}
+            //             // window.open("/searchTickets", "_blank");
+            //             navigate("/searchTickets", { state: { data: i._id } });
+            //           }}
+            //           key={k}
+            //         >
+            //           <div className="img">
+            //             <img src={dubai} alt="dubai" />
+            //             <p className="pdDays">{i.plan.length} Days</p>
+            //           </div>
+            //           <div className="content">
+            //             <h2>{i.key}</h2>
+            //           </div>
+            //         </div>
+            //       ))}
+            //     </div>
+            //   </>
+            // )
+          }
         </div>
       </div>
     );

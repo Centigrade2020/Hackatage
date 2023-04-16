@@ -34,7 +34,6 @@
   width: 100%;
   transform: translateY(-30%);
   /* filter: brightness(0.4); */
-  aspect-ratio: 3/2;
   position: absolute;
   top: 0;
   left: 0;
@@ -138,7 +137,6 @@
     height: 100%;
     width: auto;
     transform: translateY(0%);
-    transform: translateX(-30%);
   }
 
   .Auth .authHeader .content {

@@ -8,7 +8,11 @@ function TripPlannerPage(props) {
   const location = useLocation();
   const [obj, setObj] = useState(location.state.data);
   const [flight, setFlight] = useState([]);
-  const [hotel, setHotel] = useState(undefined);
+  const [hotel, setHotel] = useState({
+    name: "RR Mount Elite Suites",
+    link: "https://www.booking.com/hotel/in/rr-mount-elite-suites.de.html?aid=1938431",
+    rating: 9,
+  });
   const [showFlight, setShowFlight] = useState(true);
   // const [showHotel, setShowHotel] = useState(true);
 
@@ -33,7 +37,7 @@ function TripPlannerPage(props) {
       .request(options1)
       .then(function (response) {
         console.log(response.data);
-        setHotel(response.data);
+        // setHotel(response.data);
       })
       .catch(function (error) {
         console.error(error);
@@ -118,7 +122,7 @@ function TripPlannerPage(props) {
               </p>
               <div className="activities">
                 {day.activities.map((activity, k) => (
-                  <div className="activity">
+                  <div className="activity" key={k}>
                     <p>{activity.time}</p>
                     <h3>{activity.description}</h3>
                   </div>
@@ -171,7 +175,8 @@ function TripPlannerPage(props) {
               showFlight && flightData();
             }}
           >
-            <span class="material-symbols-outlined">flight</span> Search Flight
+            <span className="material-symbols-outlined">flight</span> Search
+            Flight
           </button>
         </div>
         <div className="tab">
@@ -181,16 +186,17 @@ function TripPlannerPage(props) {
               hotelData();
             }}
           >
-            <span class="material-symbols-outlined">hotel</span> Search Hotel
+            <span className="material-symbols-outlined">hotel</span> Search
+            Hotel
           </button>
         </div>
       </div>
       <div className="searchDisplay">
         <div className="sdTabF">
           {flight.map((index, key) => (
-            <div className="flight">
+            <div className="flight" key={key}>
               {index.children.map((val, ke) => (
-                <div className="Fheader">
+                <div className="Fheader" key={ke}>
                   <label>
                     <h3>UUID</h3>
                     <p>{val.attributes.FLSUUID}</p>

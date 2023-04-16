@@ -1,172 +1,207 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  const [profileData, setProfileData] = useState({
-    fname: JSON.parse(localStorage.getItem("user"))["fname"],
-    lname: JSON.parse(localStorage.getItem("user"))["lname"],
-    email: JSON.parse(localStorage.getItem("user"))["email"],
-    month: "Mar",
-  });
+  const [profileData, setProfileData] = useState({});
 
-  const [bookings, setBookings] = useState([
-    {
-      _id: "6424d2b113185d8420fdb6fc",
-      name: "London trip",
-      plan: [
-        {
-          day: 1,
-          activities: [
-            {
-              time: "9:00 AM",
-              description: "Arrive in London and check-in to hotel",
-            },
-            {
-              time: "11:00 AM",
-              description: "Visit the British Museum",
-            },
-            {
-              time: "2:00 PM",
-              description: "Take a tour of the Tower of London",
-            },
-            {
-              time: "6:00 PM",
-              description: "Take a stroll through Hyde Park",
-            },
-          ],
-        },
-        {
-          day: 2,
-          activities: [
-            {
-              time: "9:00 AM",
-              description: "Visit Buckingham Palace",
-            },
-            {
-              time: "11:00 AM",
-              description: "Explore the famous Trafalgar Square",
-            },
-            {
-              time: "2:00 PM",
-              description: "Have lunch at Covent Garden Market",
-            },
-            {
-              time: "4:00 PM",
-              description: "Visit the London Eye",
-            },
-            {
-              time: "6:00 PM",
-              description: "Take a walk along the River Thames",
-            },
-          ],
-        },
-        {
-          day: 3,
-          activities: [
-            {
-              time: "9:00 AM",
-              description: "Visit the Houses of Parliament",
-            },
-            {
-              time: "11:00 AM",
-              description: "Take a tour of Westminster Abbey",
-            },
-            {
-              time: "2:00 PM",
-              description: "Visit the Tate Modern art museum",
-            },
-            {
-              time: "5:00 PM",
-              description: "Enjoy a traditional English afternoon tea",
-            },
-            {
-              time: "7:00 PM",
-              description: "Watch a musical performance at the West End",
-            },
-          ],
-        },
-      ],
-      key: "3-london,uk",
-    },
-    {
-      _id: "6424d2b113185d8420fdb6fc",
-      name: "London trip",
-      plan: [
-        {
-          day: 1,
-          activities: [
-            {
-              time: "9:00 AM",
-              description: "Arrive in London and check-in to hotel",
-            },
-            {
-              time: "11:00 AM",
-              description: "Visit the British Museum",
-            },
-            {
-              time: "2:00 PM",
-              description: "Take a tour of the Tower of London",
-            },
-            {
-              time: "6:00 PM",
-              description: "Take a stroll through Hyde Park",
-            },
-          ],
-        },
-        {
-          day: 2,
-          activities: [
-            {
-              time: "9:00 AM",
-              description: "Visit Buckingham Palace",
-            },
-            {
-              time: "11:00 AM",
-              description: "Explore the famous Trafalgar Square",
-            },
-            {
-              time: "2:00 PM",
-              description: "Have lunch at Covent Garden Market",
-            },
-            {
-              time: "4:00 PM",
-              description: "Visit the London Eye",
-            },
-            {
-              time: "6:00 PM",
-              description: "Take a walk along the River Thames",
-            },
-          ],
-        },
-        {
-          day: 3,
-          activities: [
-            {
-              time: "9:00 AM",
-              description: "Visit the Houses of Parliament",
-            },
-            {
-              time: "11:00 AM",
-              description: "Take a tour of Westminster Abbey",
-            },
-            {
-              time: "2:00 PM",
-              description: "Visit the Tate Modern art museum",
-            },
-            {
-              time: "5:00 PM",
-              description: "Enjoy a traditional English afternoon tea",
-            },
-            {
-              time: "7:00 PM",
-              description: "Watch a musical performance at the West End",
-            },
-          ],
-        },
-      ],
-      key: "3-london,uk",
-    },
-  ]);
+  const [bookingData, setBookingData] = useState({});
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("isAuthenticated")) {
+      navigate("/auth");
+    }
+  }, [localStorage.getItem("isAuthenticated")]);
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setProfileData({
+        fname: JSON.parse(localStorage.getItem("user"))["fname"],
+        lname: JSON.parse(localStorage.getItem("user"))["lname"],
+        email: JSON.parse(localStorage.getItem("user"))["email"],
+        month: "Mar",
+      });
+    }
+  }, [localStorage.getItem("user")]);
+
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/get_book", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: JSON.parse(localStorage.getItem("user"))["email"],
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setBookings(res["message"]);
+      });
+  }, []);
+  // const [bookings, setBookings] = useState([
+  //   {
+  //     _id: "6424d2b113185d8420fdb6fc",
+  //     name: "London trip",
+  //     plan: [
+  //       {
+  //         day: 1,
+  //         activities: [
+  //           {
+  //             time: "9:00 AM",
+  //             description: "Arrive in London and check-in to hotel",
+  //           },
+  //           {
+  //             time: "11:00 AM",
+  //             description: "Visit the British Museum",
+  //           },
+  //           {
+  //             time: "2:00 PM",
+  //             description: "Take a tour of the Tower of London",
+  //           },
+  //           {
+  //             time: "6:00 PM",
+  //             description: "Take a stroll through Hyde Park",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         day: 2,
+  //         activities: [
+  //           {
+  //             time: "9:00 AM",
+  //             description: "Visit Buckingham Palace",
+  //           },
+  //           {
+  //             time: "11:00 AM",
+  //             description: "Explore the famous Trafalgar Square",
+  //           },
+  //           {
+  //             time: "2:00 PM",
+  //             description: "Have lunch at Covent Garden Market",
+  //           },
+  //           {
+  //             time: "4:00 PM",
+  //             description: "Visit the London Eye",
+  //           },
+  //           {
+  //             time: "6:00 PM",
+  //             description: "Take a walk along the River Thames",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         day: 3,
+  //         activities: [
+  //           {
+  //             time: "9:00 AM",
+  //             description: "Visit the Houses of Parliament",
+  //           },
+  //           {
+  //             time: "11:00 AM",
+  //             description: "Take a tour of Westminster Abbey",
+  //           },
+  //           {
+  //             time: "2:00 PM",
+  //             description: "Visit the Tate Modern art museum",
+  //           },
+  //           {
+  //             time: "5:00 PM",
+  //             description: "Enjoy a traditional English afternoon tea",
+  //           },
+  //           {
+  //             time: "7:00 PM",
+  //             description: "Watch a musical performance at the West End",
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //     key: "3-london,uk",
+  //   },
+  //   {
+  //     _id: "6424d2b113185d8420fdb6fc",
+  //     name: "London trip",
+  //     plan: [
+  //       {
+  //         day: 1,
+  //         activities: [
+  //           {
+  //             time: "9:00 AM",
+  //             description: "Arrive in London and check-in to hotel",
+  //           },
+  //           {
+  //             time: "11:00 AM",
+  //             description: "Visit the British Museum",
+  //           },
+  //           {
+  //             time: "2:00 PM",
+  //             description: "Take a tour of the Tower of London",
+  //           },
+  //           {
+  //             time: "6:00 PM",
+  //             description: "Take a stroll through Hyde Park",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         day: 2,
+  //         activities: [
+  //           {
+  //             time: "9:00 AM",
+  //             description: "Visit Buckingham Palace",
+  //           },
+  //           {
+  //             time: "11:00 AM",
+  //             description: "Explore the famous Trafalgar Square",
+  //           },
+  //           {
+  //             time: "2:00 PM",
+  //             description: "Have lunch at Covent Garden Market",
+  //           },
+  //           {
+  //             time: "4:00 PM",
+  //             description: "Visit the London Eye",
+  //           },
+  //           {
+  //             time: "6:00 PM",
+  //             description: "Take a walk along the River Thames",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         day: 3,
+  //         activities: [
+  //           {
+  //             time: "9:00 AM",
+  //             description: "Visit the Houses of Parliament",
+  //           },
+  //           {
+  //             time: "11:00 AM",
+  //             description: "Take a tour of Westminster Abbey",
+  //           },
+  //           {
+  //             time: "2:00 PM",
+  //             description: "Visit the Tate Modern art museum",
+  //           },
+  //           {
+  //             time: "5:00 PM",
+  //             description: "Enjoy a traditional English afternoon tea",
+  //           },
+  //           {
+  //             time: "7:00 PM",
+  //             description: "Watch a musical performance at the West End",
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //     key: "3-london,uk",
+  //   },
+  // ]);
 
   const TabProfile = () => {
     const [disabled, setDisabled] = useState(true);
@@ -181,8 +216,6 @@ function Dashboard() {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [country, setCountry] = useState("");
-
-    useEffect(() => {}, {});
 
     useEffect(() => {
       fetch("http://localhost:8000/get_user", {
@@ -454,7 +487,7 @@ function Dashboard() {
         <div className="bheader">
           <label>
             <h3>Trip Name</h3>
-            <p>{obj.name}</p>
+            <p>{obj.key}</p>
           </label>
           <label>
             <h3>Booking ID</h3>
