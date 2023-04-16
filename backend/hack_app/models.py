@@ -60,7 +60,6 @@ def add_data(data,email ):
 
 def booking(data):
     print(data['_id'])
-<<<<<<< HEAD
     # print(data['plan'])
     # print(data['flight'])
     # print(data['hotel'])
@@ -74,12 +73,6 @@ def get_book_data(email):
     return user
 
 
-=======
-    print(data['plan'])
-    print(data['flight'])
-    print(data['hotel'])
-    print(data['email'])
->>>>>>> refs/remotes/origin/main
 
 
 def u_user(userId,phone,day,month,year,city,state,country):

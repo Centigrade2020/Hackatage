@@ -3,11 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view,parser_classes
 from rest_framework.parsers import JSONParser
 from django.contrib.auth.hashers import make_password,check_password
-<<<<<<< HEAD
 from .models import get_auth,add_user,get_user,authenticate,get_book_data,logout_user,u_user,add_data,booking
-=======
-from .models import get_auth,add_user,get_user,authenticate,chk_auth,logout_user,u_user,add_data,booking
->>>>>>> refs/remotes/origin/main
 from bson import json_util
 import json
 import openai
@@ -199,7 +195,6 @@ def ask_ai(request):
 @api_view(["POST"])
 @parser_classes([JSONParser])
 def book(request):
-<<<<<<< HEAD
     try:
         data  =request.data
         booking(data)
@@ -218,9 +213,3 @@ def get_bookings(request):
     except Exception as e:
         print("get booking",e)
         return Response({"message":"Some Error occured",'status_code':500})
-=======
-    data  =request.data
-    booking(data)
-    # print(data)
-    return Response({})
->>>>>>> refs/remotes/origin/main

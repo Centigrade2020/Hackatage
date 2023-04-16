@@ -485,8 +485,7 @@ function Home() {
                     onClick={() => {
                       // {<Navigate to="/searchTickets" replace="true"></Navigate>}
                       // window.open("/searchTickets", "_blank");
-                      navigate("/searchTickets", { state: { data:i._id} });
-
+                      navigate("/searchTickets", { state: { data: i._id } });
                     }}
                     key={k}
                   >
@@ -535,8 +534,7 @@ function Home() {
                   className="package"
                   onClick={() => {
                     // window.open("/searchTickets", "_blank");
-                    navigate("/searchTickets",{ state: { data:i} });
-
+                    navigate("/searchTickets", { state: { data: i } });
                   }}
                   key={k}
                 >
