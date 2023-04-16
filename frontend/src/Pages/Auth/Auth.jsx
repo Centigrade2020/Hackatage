@@ -69,7 +69,6 @@ function Auth() {
 
   return (
     <div className="Auth">
-      <GoogleOAuthProvider clientId="983222062492-hg2nks96hdo66l7roqsgtltglblv0138.apps.googleusercontent.com">
         <div className="authHeader">
           <img src={authbg} alt="authbg" />
           <div className="overlay"></div>
@@ -213,6 +212,8 @@ function Auth() {
                   Signup
                 </a>
               </p>
+      {/* <GoogleOAuthProvider clientId="983222062492-hg2nks96hdo66l7roqsgtltglblv0138.apps.googleusercontent.com">
+
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   console.log(credentialResponse);
@@ -222,10 +223,11 @@ function Auth() {
                 }}
                 width="400px"
               />
+      </GoogleOAuthProvider> */}
+
             </div>
           )}
         </div>
-      </GoogleOAuthProvider>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
 
@@ -473,7 +473,10 @@ function Home() {
                   <div
                     className="package"
                     onClick={() => {
-                      window.open("/searchTickets", "_blank");
+                      // {<Navigate to="/searchTickets" replace="true"></Navigate>}
+                      // window.open("/searchTickets", "_blank");
+                      navigate("/searchTickets", { state: { data:i._id} });
+
                     }}
                   >
                     <div className="img">
@@ -520,7 +523,9 @@ function Home() {
                 <div
                   className="package"
                   onClick={() => {
-                    window.open("/searchTickets", "_blank");
+                    // window.open("/searchTickets", "_blank");
+                    navigate("/searchTickets",{ state: { data:i} });
+
                   }}
                 >
                   <div className="img">
@@ -648,7 +653,7 @@ function Home() {
 
               <button
                 onClick={() => {
-                  // handleClick();
+                  handleClick();
                   setOpenTP(true);
                 }}
               >
