@@ -48,14 +48,16 @@ function Navbar() {
 
   return (
     <nav className="Navbar">
-      <div className="logo">
+      <div
+        className="logo"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
         <h1>Travel Planner</h1>
       </div>
       {loggedIn ? (
         <ul>
-          <li>
-            <NavLink name={"Home"} path={"/"} />
-          </li>
           <li>
             <NavLink name={name} path={"/dashboard"} />
           </li>
@@ -79,7 +81,7 @@ function Navbar() {
                 });
             }}
           >
-            <span class="material-symbols-outlined" title="logout">
+            <span className="material-symbols-outlined" title="logout">
               logout
             </span>
           </li>
@@ -87,9 +89,6 @@ function Navbar() {
       ) : (
         <ul className="navLinks">
           <ul>
-            <li>
-              <NavLink name={"Home"} path={"/"} />
-            </li>
             <li>
               <NavLink name={"Login/Signup"} path={"/auth"} />
             </li>

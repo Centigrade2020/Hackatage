@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import authbg from "../../Assets/authbg.jpg";
 
@@ -94,7 +93,6 @@ function Auth() {
 
   return (
     <div className="Auth">
-<<<<<<< HEAD
       <div className="authHeader">
         <img src={authbg} alt="authbg" />
         <div className="overlay"></div>
@@ -103,166 +101,6 @@ function Auth() {
             Not all those who wander <br /> are lost
           </h1>
           <p>Login to get full access to our application</p>
-=======
-        <div className="authHeader">
-          <img src={authbg} alt="authbg" />
-          <div className="overlay"></div>
-          <div className="content">
-            <h1>
-              Not all those who wander <br /> are lost
-            </h1>
-            <p>Login to get full access to our application</p>
-          </div>
-
-          {newUser ? (
-            <div className="authCard">
-              <h1>Signup</h1>
-              <form>
-                <label>
-                  <p>Enter your email</p>{" "}
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    name="email"
-                  />
-                </label>
-
-                <div>
-                  <label>
-                    <p>First name</p>{" "}
-                    <input
-                      type="text"
-                      value={fname}
-                      onChange={(e) => setFname(e.target.value)}
-                      placeholder="First name"
-                      name="fname"
-                    />
-                  </label>
-                  <label>
-                    <p>Last name</p>{" "}
-                    <input
-                      type="text"
-                      value={lname}
-                      onChange={(e) => setLname(e.target.value)}
-                      placeholder="Last name"
-                      name="lname"
-                    />
-                  </label>
-                </div>
-
-                <label>
-                  <p>Password</p>{" "}
-                  <input
-                    type="password"
-                    value={passwd}
-                    onChange={(e) => setPasswd(e.target.value)}
-                    placeholder="Password"
-                    name="password"
-                  />
-                </label>
-
-                <label>
-                  <p>Confirm password</p>{" "}
-                  <input
-                    type="password"
-                    value={cnfPass}
-                    onChange={(e) => setCnfPass(e.target.value)}
-                    placeholder="Confirm password"
-                    name="cpassword"
-                  />
-                </label>
-              </form>
-              <button
-                onClick={() => {
-                  handleRegister();
-                }}
-              >
-                Sign up
-              </button>
-
-              <p>
-                Already signed up?{" "}
-                <a
-                  onClick={() => {
-                    setNewUser(false);
-                  }}
-                >
-                  Login
-                </a>
-              </p>
-
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  console.log(credentialResponse);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-                width="500px"
-              />
-            </div>
-          ) : (
-            <div className="authCard">
-              <h1>Login</h1>
-
-              <form>
-                <label>
-                  <p>Enter your email</p>{" "}
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    name="email"
-                  />
-                </label>
-                <label>
-                  <p>Enter your password</p>{" "}
-                  <input
-                    type="password"
-                    value={passwd}
-                    onChange={(e) => setPasswd(e.target.value)}
-                    placeholder="Password"
-                    name="password"
-                  />
-                </label>
-              </form>
-              <button
-                onClick={() => {
-                  handleLogin();
-                }}
-              >
-                Log in
-              </button>
-
-              <p>
-                Not signed up?{" "}
-                <a
-                  onClick={() => {
-                    setNewUser(true);
-                  }}
-                >
-                  Signup
-                </a>
-              </p>
-      {/* <GoogleOAuthProvider clientId="983222062492-hg2nks96hdo66l7roqsgtltglblv0138.apps.googleusercontent.com">
-
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  console.log(credentialResponse);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-                width="400px"
-              />
-      </GoogleOAuthProvider> */}
-
-            </div>
-          )}
->>>>>>> refs/remotes/origin/main
         </div>
 
         {newUser ? (
@@ -286,7 +124,7 @@ function Auth() {
                   <input
                     type="text"
                     value={fname}
-                    onChange={(e) => setLname(e.target.value)}
+                    onChange={(e) => setFname(e.target.value)}
                     placeholder="First name"
                     name="fname"
                   />
@@ -296,7 +134,7 @@ function Auth() {
                   <input
                     type="text"
                     value={lname}
-                    onChange={(e) => setFname(e.target.value)}
+                    onChange={(e) => setLname(e.target.value)}
                     placeholder="Last name"
                     name="lname"
                   />
@@ -391,7 +229,134 @@ function Auth() {
           </div>
         )}
       </div>
+
+      {newUser ? (
+        <div className="authCard">
+          <h1>Signup</h1>
+          <form>
+            <label>
+              <p>Enter your email</p>{" "}
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                name="email"
+              />
+            </label>
+
+            <div>
+              <label>
+                <p>First name</p>{" "}
+                <input
+                  type="text"
+                  value={fname}
+                  onChange={(e) => setLname(e.target.value)}
+                  placeholder="First name"
+                  name="fname"
+                />
+              </label>
+              <label>
+                <p>Last name</p>{" "}
+                <input
+                  type="text"
+                  value={lname}
+                  onChange={(e) => setFname(e.target.value)}
+                  placeholder="Last name"
+                  name="lname"
+                />
+              </label>
+            </div>
+
+            <label>
+              <p>Password</p>{" "}
+              <input
+                type="password"
+                value={passwd}
+                onChange={(e) => setPasswd(e.target.value)}
+                placeholder="Password"
+                name="password"
+              />
+            </label>
+
+            <label>
+              <p>Confirm password</p>{" "}
+              <input
+                type="password"
+                value={cnfPass}
+                onChange={(e) => setCnfPass(e.target.value)}
+                placeholder="Confirm password"
+                name="cpassword"
+              />
+            </label>
+          </form>
+          <button
+            onClick={() => {
+              handleRegister();
+            }}
+          >
+            Sign up
+          </button>
+
+          <p>
+            Already signed up?{" "}
+            <a
+              onClick={() => {
+                setNewUser(false);
+              }}
+            >
+              Login
+            </a>
+          </p>
+        </div>
+      ) : (
+        <div className="authCard">
+          <h1>Login</h1>
+
+          <form>
+            <label>
+              <p>Enter your email</p>{" "}
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                name="email"
+              />
+            </label>
+            <label>
+              <p>Enter your password</p>{" "}
+              <input
+                type="password"
+                value={passwd}
+                onChange={(e) => setPasswd(e.target.value)}
+                placeholder="Password"
+                name="password"
+              />
+            </label>
+          </form>
+          <button
+            onClick={() => {
+              handleLogin();
+            }}
+          >
+            Log in
+          </button>
+
+          <p>
+            Not signed up?{" "}
+            <a
+              onClick={() => {
+                setNewUser(true);
+              }}
+            >
+              Signup
+            </a>
+          </p>
+        </div>
+      )}
     </div>
+    // </div>
   );
 }
 

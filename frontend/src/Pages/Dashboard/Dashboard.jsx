@@ -1,13 +1,28 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  const [profileData, setProfileData] = useState({
-    fname: JSON.parse(localStorage.getItem("user"))["fname"],
-    lname: JSON.parse(localStorage.getItem("user"))["lname"],
-    email: JSON.parse(localStorage.getItem("user"))["email"],
-    month: "Mar",
-  });
+  const [profileData, setProfileData] = useState({});
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("isAuthenticated")) {
+      navigate("/auth");
+    }
+  }, [localStorage.getItem("isAuthenticated")]);
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setProfileData({
+        fname: JSON.parse(localStorage.getItem("user"))["fname"],
+        lname: JSON.parse(localStorage.getItem("user"))["lname"],
+        email: JSON.parse(localStorage.getItem("user"))["email"],
+        month: "Mar",
+      });
+    }
+  }, [localStorage.getItem("user")]);
   const ShareView = () => {
     return (
       <div className="ShareView">
