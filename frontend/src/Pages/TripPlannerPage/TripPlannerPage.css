@@ -287,3 +287,58 @@
   color: aliceblue;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
+
+@media screen and (max-width: 600px) {
+  .Plan .dayRows .dayRow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .Plan .dayRows .dayRow .activities {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .searchTab {
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 3vh;
+  }
+
+  .searchTab input {
+    padding: 10px;
+  }
+
+  .searchDisplay {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+
+  .FixButton button {
+    padding: 10px 30px;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 200ms ease-in-out;
+    width: 100%;
+    background-color: var(--blue);
+    color: aliceblue;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+}
